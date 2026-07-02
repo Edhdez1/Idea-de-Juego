@@ -1,8 +1,8 @@
 {
-  "name": "vaporcracia",
+  "name": "el-coso-del-rey",
   "private": true,
   "version": "0.0.1",
-  "description": "Deck builder roguelite steampunk-medieval satírico (título provisional)",
+  "description": "Deck builder roguelite steampunk-medieval satírico y sinsentido",
   "type": "module",
   "scripts": {
     "dev": "vite",

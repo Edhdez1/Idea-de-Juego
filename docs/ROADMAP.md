@@ -1,6 +1,8 @@
-# Roadmap — Vaporcracia (título provisional)
+# Roadmap — El Coso del Rey
 
 Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 acto, divertido de punta a punta en 20-30 min.
+
+> Vaporcracia pasa a ser el nombre del **reino**; el juego se llama **«El Coso del Rey»** y su premisa (la freidora de aire caída del cielo) está en el GDD §0.
 
 ## Fase 0 — Scaffolding ✅ (esta rama)
 - Investigación consolidada (`docs/investigacion/`), GDD y roadmap.
@@ -23,9 +25,10 @@ Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 a
 
 ## Fase 3 — Loop de run completo
 - Mapa de nodos procedural (random walks sin cruces) + escena Map.
-- Recompensas (1 de 3), tienda, hoguera, eventos "?", reliquias.
+- Recompensas (1 de 3), tienda, hoguera, eventos "?", reliquias (el **Coso** como reliquia inicial).
+- **Taberna v1**: nodo de mapa con 2 mercenarios contratables (Contratos: mini-baraja de 3 «Órdenes» + retrato + barks, vence al final del acto), rumores del Coso, beber (cura + carta «Resaca»).
 - Save/load en localStorage (`game:run` / `game:meta`) con versionado y export/import.
-- **Narrador v1**: sistema de barks data-driven sobre GameEvents (cooldowns, pesos, memoria) con banco inicial de ~30 líneas en 3 niveles (burla diegética / meta-juego / cuarta pared).
+- **Narrador v1**: sistema de barks data-driven sobre GameEvents (cooldowns, pesos, memoria) con banco inicial de ~30 líneas en 3 niveles (burla diegética / meta-juego / cuarta pared), incluidas sus líneas sobre el Coso.
 
 ## Fase 4 — Arte de producción con IA
 - Paleta bloqueada (Resurrect 64 + sub-paletas) y pipeline Pillow de cuantización.
@@ -34,7 +37,7 @@ Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 a
 - Marcos de carta pixel (tipo + rareza), fuentes bitmap (m6x11 + monogram), atlas con free-tex-packer-core.
 
 ## Fase 5 — Contenido y balance del vertical slice
-- 30-35 cartas, 10-12 reliquias, 4-6 eventos satíricos, élite + jefe con diálogo (líneas de jefe, niveles 1-3).
+- 30-35 cartas (todo el texto de la Ingeniera con su acento paisa), 10-12 reliquias, 4-6 eventos satíricos (máx. 1 cameo pop parodiado según las reglas del GDD §8), élite + jefe con diálogos del Coso (niveles 1-3 de cuarta pared).
 - Balance por playtesting (simulaciones headless del core + partidas reales).
 
 ## Fase 6 — Pulido y deploy
@@ -43,6 +46,7 @@ Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 a
 - Deploy a Vercel con link público jugable.
 
 ## Post-slice (MVP público → futuro)
-- 50-60 cartas, 2 actos, 2 jefes, meta-progresión ligera (6-8 desbloqueos) + 3 Ascensiones.
+- 50-60 cartas, 2 actos, 2 jefes, meta-progresión ligera (6-8 desbloqueos: cada final desbloquea una explicación NUEVA y peor del Coso) + 3 Ascensiones.
 - Segundo personaje (el Barón del Humo) **solo tras validar el primero**.
-- Más adelante: daily runs (seed por fecha), Ruleta de Engranajes, Contrabando, narrador con voz, itch.io/Steam Next Fest.
+- **Taberna v2**: mercenario como aliado en tablero (sprite propio, 1 acción por turno, puede morir), más mercenarios con acentos, tablón de misiones absurdas.
+- Más adelante: daily runs (seed por fecha), Ruleta de Engranajes, Contrabando, narrador con voz (ElevenLabs, acentos), itch.io/Steam Next Fest.
