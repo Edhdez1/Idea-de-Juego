@@ -1,0 +1,72 @@
+/**
+ * Cartas de la Ingeniera Desahuciada — el precariado creativo.
+ * Solo datos: la lógica vive en src/core/. La sátira vive en el flavor.
+ */
+
+import type { CardDef } from '../../core/types';
+
+export const INGENIERA_CARDS: CardDef[] = [
+  {
+    id: 'golpe_de_llave',
+    name: 'Golpe de Llave Inglesa',
+    cost: 1,
+    type: 'attack',
+    rarity: 'starter',
+    target: 'enemy',
+    effects: [{ kind: 'damage', amount: 6 }],
+    description: 'Inflige 6 de daño.',
+    flavor: 'Herramienta oficial de negociación colectiva.',
+  },
+  {
+    id: 'plancha_remachada',
+    name: 'Plancha Remachada',
+    cost: 1,
+    type: 'skill',
+    rarity: 'starter',
+    target: 'self',
+    effects: [{ kind: 'block', amount: 5 }],
+    description: 'Gana 5 de bloqueo.',
+    flavor: 'Certificada por el Gremio. La certificación caducó hace 12 años.',
+  },
+  {
+    id: 'motor_a_presion',
+    name: 'Motor a Presión',
+    cost: 2,
+    type: 'attack',
+    rarity: 'common',
+    target: 'enemy',
+    effects: [
+      { kind: 'damage', amount: 12 },
+      { kind: 'pressure', amount: 2 },
+    ],
+    description: 'Inflige 12 de daño. Presión +2.',
+    flavor: 'El manual decía "no exceder". El manual no paga el alquiler.',
+  },
+  {
+    id: 'valvula_de_escape',
+    name: 'Válvula de Escape',
+    cost: 1,
+    type: 'skill',
+    rarity: 'common',
+    target: 'self',
+    effects: [{ kind: 'ventPressure', blockPerPressure: 2 }],
+    description: 'Purga toda la Presión. Gana 2 de bloqueo por cada punto purgado.',
+    flavor: 'Respirar también es una válvula, pero cotiza menos.',
+  },
+  {
+    id: 'prototipo_inestable',
+    name: 'Prototipo Inestable',
+    cost: 1,
+    type: 'attack',
+    rarity: 'uncommon',
+    target: 'enemy',
+    effects: [
+      { kind: 'damage', amount: 14 },
+      { kind: 'pressure', amount: 3 },
+    ],
+    keywords: ['prototype'],
+    fuse: 3,
+    description: 'Inflige 14 de daño. Presión +3. Explota tras 3 usos.',
+    flavor: 'Patente pendiente. Esperanza de vida: también pendiente.',
+  },
+];
