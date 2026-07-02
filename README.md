@@ -1,12 +1,12 @@
-# Vaporcracia (título provisional)
+# El Coso del Rey
 
-Deck builder roguelite steampunk-medieval con sátira social y mecánicas de caos justo. Juego web en pixel art hecho con Phaser 4 + TypeScript.
+Deck builder roguelite steampunk-medieval, sátira social y sinsentido total. Una freidora de aire cae del cielo en el reino de Vaporcracia y nadie —NADIE— averiguará jamás qué es. Juego web en pixel art hecho con Phaser 4 + TypeScript.
 
-> *Sube la pirámide social a golpe de cartas… y reza para que la caldera no cante demasiado.*
+> *Fríe sin aceite. Técnicamente, eso es un milagro.*
 
 ## Documentación
 
-- **[GDD](docs/GDD.md)** — concepto, pilares, mecánicas (Presión de Vapor, Prototipos, Overclock), personajes, el Narrador y la cuarta pared.
+- **[GDD](docs/GDD.md)** — la premisa del Coso, pilares, mecánicas (Presión de Vapor, Prototipos, Overclock), personajes con acentos, la Taberna y los mercenarios, guiños pop sin copyright, el Narrador y la cuarta pared.
 - **[Roadmap](docs/ROADMAP.md)** — plan por fases hasta el vertical slice y más allá.
 - **Investigación**: [diseño de juego](docs/investigacion/01-diseno-de-juego.md) · [arte pixel](docs/investigacion/02-arte-pixel.md) · [animación](docs/investigacion/03-animacion.md) · [arquitectura](docs/investigacion/04-arquitectura.md).
 

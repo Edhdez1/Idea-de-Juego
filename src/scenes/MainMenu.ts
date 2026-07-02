@@ -12,7 +12,7 @@ export class MainMenuScene extends Phaser.Scene {
 
   create(): void {
     this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 20, 'VAPORCRACIA', {
+      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 20, 'EL COSO DEL REY', {
         fontFamily: 'monospace',
         fontSize: '32px',
         color: '#e8c170',
