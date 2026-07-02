@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
 import { BootScene } from '../scenes/Boot';
-import { PreloadScene } from '../scenes/Preload';
+import { CombatScene } from '../scenes/Combat';
+import { HUDScene } from '../scenes/HUD';
 import { MainMenuScene } from '../scenes/MainMenu';
+import { PreloadScene } from '../scenes/Preload';
+import { GAME_HEIGHT, GAME_WIDTH } from './constants';
 
-/** Resolución interna pixel-perfect; ver docs/investigacion/02-arte-pixel.md */
-export const GAME_WIDTH = 640;
-export const GAME_HEIGHT = 360;
+export { GAME_HEIGHT, GAME_WIDTH } from './constants';
 
 export const gameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -18,5 +19,5 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [BootScene, PreloadScene, MainMenuScene],
+  scene: [BootScene, PreloadScene, MainMenuScene, CombatScene, HUDScene],
 };
