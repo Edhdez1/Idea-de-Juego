@@ -5,5 +5,7 @@
 
 export * from './types';
 export * from './rng';
-export { createCombat, playCard, makeRegistry, pressureMultiplier } from './combat/resolve';
-export type { CardRegistry, EnemySpawn } from './combat/resolve';
+export { createCombat, playCard, endTurn, makeRegistry, pressureMultiplier } from './combat/resolve';
+export type { Registry } from './combat/resolve';
+export { STATUSES, computeAttackDamage, tickTurnStart, decayStatuses } from './combat/statuses';
+export type { StatusDef } from './combat/statuses';
