@@ -24,6 +24,12 @@ La estructura narrativa de la run: **cada acto es una institución que se apropi
 
 Cada personaje jugable persigue el Coso por su propia razón, igual de absurda (ver §4). Ningún final revela la verdad: cada final desbloquea una explicación NUEVA y peor. El único que sabe qué es, es el **Narrador** (§6) — y no piensa decirlo, aunque a veces se le escapan pistas incomprensibles para el reino («necesita 220 voltios; qué pena que eso no exista hasta dentro de 600 años»).
 
+### Las Goteras del Tiempo
+
+El Coso no vino solo. Su aparición **agujereó el tiempo**, y desde entonces al reino le caen anacronismos como a un techo viejo le caen goteras: personas de otras épocas, palabras que aún no existen, acentos de lugares que aún no se fundan, y héroes que claramente pertenecen a otras historias. Nadie del reino lo encuentra raro — la burocracia ya tiene un formulario para ello (el T-800: «Solicitud de Registro de Persona Temporalmente Desplazada»).
+
+Las Goteras son el pegamento del lore: **justifican los personajes de otras épocas (§4), los acentos anacrónicos (§4.2), los cameos pop (§8) y al propio Coso** con una sola regla del mundo. Y son inagotables como fuente de contenido: cualquier cosa puede caerse por una gotera.
+
 **Regla de producción**: la premisa es *envoltorio narrativo* — vive en eventos, diálogos de jefes, flavor y el Narrador. No añade sistemas mecánicos. El Coso puede ser, mecánicamente, la reliquia inicial de la run.
 
 ## 1. Pilares de diseño
@@ -57,35 +63,57 @@ Keyword: *«Overclock (opcional): +2 de Presión → efecto doblado»*. Cada tur
 
 ### Post-MVP: Ruleta de Engranajes (azar entre resultados todos buenos, visibles en la carta) y Contrabando (reliquias potentes con maldición satírica pegada, opt-in).
 
-## 4. Personajes jugables (la pirámide social)
+## 4. Personajes jugables: las cuatro épocas
 
-| Clase | Sátira de | Mecánica de mazo | Relación con el caos |
-|---|---|---|---|
-| **La Ingeniera Desahuciada** ⭐ inicial | El precariado creativo (crunch, patentes robadas, "pago en exposición") | **Artilugios**: cartas-máquina persistentes que disparan cada turno; Prototipos | Especialista en Presión: la genera más rápido y es la única que convierte la Sobrecarga en arma dirigida |
-| **El Barón del Humo** | Aristocracia rentista ("demasiado noble para quebrar") | El **oro como recurso de combate**: contrata mercenarios, soborna enemigos, interés post-combate | Apostador: doble o nada — arriesga su cartera hasta que la deuda toca HP |
-| **El Clérigo del Vapor Bendito** | El vendehumo (televangelista medieval, wellness) | **Feligreses** (stacks por sermones) → colectas que escalan; milagros-placebo; inyecta «Reliquias Falsas» al mazo enemigo | Caos *exportado*: él vive ordenado, sus víctimas no |
-| **La Recaudadora Mayor** | El Estado extractivo (fisco, deuda soberana) | **Deuda**: juega por encima de su energía; cada 3 turnos vence el plazo (telegrafiado) y paga con HP + intereses; Embargos | Bomba de relojería determinista, alto riesgo/alto skill |
+Por las Goteras del Tiempo (§0) no solo cayó el Coso: cayeron *personas*. Los personajes jugables vienen de **cuatro épocas**, y cada época define su relación con el Coso, su estilo de mazo y su lectura del mundo. **Importante (guardarraíl)**: las épocas NO son cuatro mundos — el reino, los enemigos, el mapa y la dirección de arte son siempre los mismos (steampunk-medieval). La época vive en el personaje: su mazo, su splash, sus barks y cómo reaccionan los eventos ante él. Así la variedad se multiplica sin multiplicar la producción del mundo.
 
-**Selección de personaje**: splash art ilustrado de alta resolución (Higgsfield) de fondo, degradado a transparente, dentro de panel con marco pixel; el sprite de combate y las stats delante.
+**Selección de época**: en la primera partida el juego pregunta al jugador de qué época viene («Solicitud T-800: marque su siglo de origen») y eso define su personaje inicial. Las demás épocas se **desbloquean como rutas** completando runs (la meta-progresión del MVP): cada época desbloqueada añade su personaje, sus cameos de evento y su epílogo con una explicación nueva del Coso.
 
-### 4.1 Por qué persigue cada uno el Coso (todas las razones son igual de malas)
+| Época | Personaje | Sátira de | Relación con el Coso | Mecánica de mazo |
+|---|---|---|---|---|
+| **Steampunk** ⭐ inicial del slice | **La Ingeniera Desahuciada** | El precariado creativo (crunch, patentes robadas, «pago en exposición») | **Agnóstica**: sabe que fríe; no sabe CÓMO fríe sin aceite. «¿Será magia? No. ¿Entonces? …¿será magia?» Le arde no poder abrirla (el plástico protector es sagrado) | **Artilugios** persistentes + Presión/Prototipos: la especialista en caos elegido |
+| **Medieval** | **El Clérigo del Vapor Bendito** | El vendehumo (televangelista medieval, wellness) | **La adora como a un dios**: fundó su culto («la Freidora da y la Freidora quita el aceite») y vive de administrar sus pitidos como profecías | **Feligreses** (stacks por sermones) → colectas que escalan; milagros-placebo; inyecta «Reliquias Falsas» al mazo enemigo |
+| **Futurista** | **La Historiadora Varada** | La academia y el sabelotodo insufrible (y la tragedia de Casandra) | **Sabe EXACTAMENTE qué es** — su tesis doctoral fue sobre electrodomésticos del siglo XXI. Nadie le cree. Cada vez que lo explica, el reino aplaude «qué imaginación» | **Spoilers**: información como recurso — ve el próximo intent extra de los enemigos, mira/ordena el top del mazo, «ya leí este combate» |
+| **Cyberpunk** | **El Reparador No Autorizado** | El tech-bro de barrio: jailbreaks, suscripciones, «todo es una oportunidad de negocio» | **Le da igual qué es**: quiere rootearla, meterle firmware pirata y venderle al reino el plan premium de algo que era gratis | **Glitches/Suscripciones**: cartas que se «actualizan» solas al jugarse (mejoran o ganan bugs), deuda técnica que estalla telegrafiada |
+
+**El Barón del Humo y la Recaudadora Mayor** no desaparecen: pasan a ser pilares del mundo — el Barón es el NPC estrella de la Taberna y los eventos de inversión (y candidato a 5.º jugable post-MVP); la Recaudadora es élite recurrente al servicio de la Corona (perseguirte a TI es su arco).
+
+### 4.1 Tecnología de otras épocas: «Nerfeado porque sí»
+
+Los personajes futurista y cyberpunk llegan con objetos que deberían romper el juego, y esto se resuelve **con la cuarta pared, no con excusas de lore**: sus cartas tienen números normales y el Narrador asume la culpa en el flavor. Es una mina de humor que convierte un problema de balance en identidad:
+
+- *«Láser Desintegrador de Antimateria» — Inflige 8 de daño.* («Debería vaporizar el continente. Lo dejé en 8 por equilibrio narrativo. De nada.» — el Narrador)
+- *«Katana Monomolecular» — Inflige 7 de daño.* («Corta átomos. También corta mi paciencia con los números grandes.» — el Narrador)
+- La Historiadora tiene una carta que literalmente se llama *«En Mi Época Esto Era Instantáneo»* (roba 2; el Narrador: «aquí se roba de una en una, señora, hay cola»).
+
+### 4.2 Por qué persigue cada uno el Coso (todas las razones son igual de malas)
 
 - **La Ingeniera**: el Gremio la acusó de haber construido el Coso *sin licencia*. Sube la pirámide para demostrar que no lo hizo… o para reclamar la patente si resulta que vale oro. Aún no lo decide.
-- **El Barón**: ya vendió 400 participaciones de «La Compañía del Coso» sin tener el Coso. Necesita conseguirlo antes de la junta de accionistas.
 - **El Clérigo**: fue el primero en declararlo milagro y ahora la Iglesia oficial le robó el negocio. Quiere recuperar *su* reliquia y su diezmo.
-- **La Recaudadora**: el Coso lleva meses en el reino sin declarar. Alguien tiene que cobrarle los impuestos atrasados. Sí, a la freidora. Los objetos también tributan.
+- **La Historiadora**: si documenta «el Incidente de la Freidora» con rigor académico, quizá la rescaten… o al menos le publiquen el paper. Necesita el Coso como evidencia primaria.
+- **El Reparador**: detectó que el Coso es el único dispositivo del reino con puerto de carga. Quien controla el único enchufe del medievo, controla el mercado.
 
-### 4.2 Acentos marcadísimos (anacrónicos a propósito)
+### 4.3 Acentos marcadísimos (anacrónicos a propósito)
 
-Cada personaje habla con un acento regional del español contemporáneo **escrito fonéticamente** en sus barks, flavor y diálogos — aunque esos lugares no existan todavía en el mundo del juego (nadie lo comenta jamás; es parte del sinsentido con cara seria):
+Cada personaje habla con un acento regional del español contemporáneo **escrito fonéticamente** en sus barks, flavor y diálogos — cortesía de las Goteras del Tiempo, y nadie del reino lo comenta jamás:
 
 - **La Ingeniera** — *paisa* (Medellín): «¡Avemaría pues, esta caldera sí sirve, home!»
-- **El Barón** — *porteño chamuyero* (Buenos Aires): «Tranquilo, che, la inversión está garantizada. ¿Vos me viste cara de mentiroso?»
 - **El Clérigo** — *yucateco* (Mérida): «No te asustes, mare, el vapor bendito lo cura todo… por una módica limosna, ¿va?»
-- **La Recaudadora** — *madrileña funcionaria castiza*: «Esto sin sellar no me vale. Vuelva usted mañana. El mostrador de al lado, que aquí es solo información.»
-- Los **mercenarios de la Taberna** (§7) amplían el mapa: un gallego, un chilango, un caribeño, un andaluz cerrado, un chileno que nadie entiende…
+- **La Historiadora** — **español neutro de doblaje de documental** (el «acento» más artificial de todos): «Observemos cómo el espécimen local intenta abrir la freidora con una espada. Fascinante. Y triste.»
+- **El Reparador** — *boricua* (San Juan): «Tranqui, papi, esto lo rooteo en dos minutos. ¿Garantía? La garantía la perdiste al nacer en este siglo, bro.»
+- **El Barón** (Taberna) — *porteño chamuyero*: «Tranquilo, che, la inversión está garantizada. ¿Vos me viste cara de mentiroso?»
+- **La Recaudadora** (élite) — *madrileña funcionaria castiza*: «Esto sin sellar no me vale. Vuelva usted mañana.»
+- Los **mercenarios de la Taberna** (§7) amplían el mapa: un gallego, una chilanga, un andaluz cerrado, un chileno que nadie entiende… y el Primo Brayan (§7).
 
 **Reglas de escritura**: (1) el acento es *cariñoso y celebratorio*, nunca burla del lugar — el chiste es el anacronismo y el personaje, no su origen; (2) escrito con muletillas y música de la región, no con transcripción impenetrable (debe seguir leyéndose rápido); (3) cada acento es también un diferenciador de UX: reconoces quién habla sin leer el nombre. A futuro, voces con ElevenLabs.
+
+### 4.4 La trama según tu grupo (fe contra escepticismo)
+
+La composición de tu party cambia el tono de la run **por contenido condicional, no por sistemas nuevos**:
+
+- **Barks de pareja**: si llevas un mercenario creyente del Coso y tu personaje es escéptico (o viceversa), discuten entre combates con líneas condicionales («—Es un dios. —Es un horno. —Los dioses también calientan, hereje»). Data-driven: cada bark declara requisitos (`{ requires: { belief: 'devoto' }, versus: { belief: 'escéptico' } }`).
+- **Eventos con variante por época/creencia**: el mismo evento "?" se lee distinto según quién eres — ante el altar de la freidora, el Clérigo puede oficiar misa (+Feligreses), la Historiadora puede corregir la liturgia (los fieles se ofenden: combate), el Reparador puede cobrar entrada.
+- **El eje de creencia** (devoto / agnóstico / escéptico / oportunista) es una etiqueta de datos en personajes y mercenarios que alimenta ambos sistemas. Nada más: sin medidores de relación ni árboles de diálogo.
 
 ## 5. Enemigos y jefes (Acto 1: el Gremio)
 
@@ -127,7 +155,9 @@ La fantasía de «llegar a la taberna y armar tu party» entra como **nuevo tipo
 - **v2 — post-slice (si v1 diverte)**: el mercenario como **aliado en tablero** — sprite de 64 px detrás del héroe, 1 acción simple por turno (patrón intents, como un enemigo amigo), puede morir (y su funeral cuesta oro).
 - La Taberna también ofrece: rumores (pistas falsas sobre el Coso, a 5 de oro el rumor — todos contradictorios), beber (cura HP, añade la carta «Resaca» al mazo), y el tablón de misiones absurdas (mini-objetivos de run: «gana un combate con la caldera a 9» → recompensa).
 
-**Elenco inicial de mercenarios** (cada uno = retrato + 3 cartas + ~6 barks): el **Matón gallego** («¡Home, xa vou!»), la **Boticaria chilanga** («Órale, esto no sabe a nada bueno, pero jala»), el **Bardo andaluz** que solo canta rumores falsos del Coso, y el **Cartógrafo chileno** al que nadie del reino entiende (sus cartas tienen el texto «???» y efectos sorpresa acotados — caos justo: el rango de efectos se ve en el tooltip).
+**Elenco inicial de mercenarios** (cada uno = retrato + 3 cartas + ~6 barks + etiqueta de creencia para §4.4): el **Matón gallego** («¡Home, xa vou!», devoto), la **Boticaria chilanga** («Órale, esto no sabe a nada bueno, pero jala», escéptica), el **Bardo andaluz** que solo canta rumores falsos del Coso (oportunista), y el **Cartógrafo chileno** al que nadie del reino entiende (sus cartas tienen el texto «???» y efectos sorpresa acotados — caos justo: el rango de efectos se ve en el tooltip).
+
+**El Primo Brayan** (mercenario especial, creencia: «lo que convenga»): campesino del reino que pasó **dos semanas** en la época cyberpunk por una gotera y volvió jurando que se le olvidó su idioma natal. Habla spanglish corporativo con muletillas de coach («Bro, es que mi *workflow* de arar el campo ya no *escala*, ¿me entiendes? ¿Cómo se dice… uhm… "vaca" en este idioma?»). Todo el reino sabe que es de aquí — su madre vive al lado de la Taberna y lo desmiente a gritos. Sus cartas: *«Networking»* (roba 1 por cada aliado/enemigo con acento distinto en combate), *«Mindset»* (bloqueo que se dobla si te dañaste a ti mismo este turno: «los golpes son *feedback*»), *«Pivotar»* (mueve una carta de tu descarte a la mano; Brayan: «esto en mi época era *drag and drop*»). Es la sátira del que emigra dos semanas y vuelve extranjero — cariñosa, porque en el fondo Brayan solo quiere que lo admiren.
 
 ## 8. Guiños pop y anime (sin infringir copyright)
 
@@ -160,7 +190,7 @@ Cada cameo es un evento con decisión mecánica real (ayudar/ignorar/explotar la
 
 ## 10. Alcance del vertical slice (primer hito)
 
-- 1 personaje (la Ingeniera, con su acento paisa en todo su texto), **30-35 cartas** (10 iniciales + 20-25 obtenibles: 12C/8U/5R).
+- 1 personaje (la Ingeniera, época steampunk, con su acento paisa en todo su texto), **30-35 cartas** (10 iniciales + 20-25 obtenibles: 12C/8U/5R). La pregunta de época inicial («Solicitud T-800») y los otros 3 personajes llegan con el MVP público — pero personajes, mercenarios y barks llevan la etiqueta de época/creencia en sus datos desde el día 1.
 - 1 acto de 12-15 nodos, **6-8 enemigos** (4-5 encuentros), 1 élite, 1 jefe (el Gran Maestre, con sus diálogos del Coso).
 - 10-12 reliquias (incluido **el Coso** como reliquia inicial de la run), 4-6 eventos satíricos (máx. 1 cameo pop), 3 consumibles.
 - **Taberna v1**: 1 nodo por acto, 2 mercenarios contratables (Contratos), rumores del Coso.

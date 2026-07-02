@@ -46,7 +46,7 @@ Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 a
 - Deploy a Vercel con link público jugable.
 
 ## Post-slice (MVP público → futuro)
-- 50-60 cartas, 2 actos, 2 jefes, meta-progresión ligera (6-8 desbloqueos: cada final desbloquea una explicación NUEVA y peor del Coso) + 3 Ascensiones.
-- Segundo personaje (el Barón del Humo) **solo tras validar el primero**.
-- **Taberna v2**: mercenario como aliado en tablero (sprite propio, 1 acción por turno, puede morir), más mercenarios con acentos, tablón de misiones absurdas.
+- 50-60 cartas, 2 actos, 2 jefes, meta-progresión de **rutas por época** (GDD §4): la pregunta inicial «Solicitud T-800» elige tu época/personaje de arranque, y completar runs desbloquea las demás épocas, sus cameos y sus epílogos (cada final = una explicación NUEVA y peor del Coso) + 3 Ascensiones.
+- Segundo personaje **solo tras validar el primero**; orden sugerido por contraste de creencia: el Clérigo (medieval devoto) → la Historiadora (futurista que sabe la verdad) → el Reparador (cyberpunk oportunista). El Barón queda como NPC de Taberna y candidato a 5.º jugable.
+- **Taberna v2**: mercenario como aliado en tablero (sprite propio, 1 acción por turno, puede morir), más mercenarios con acentos, el Primo Brayan, barks de pareja fe-vs-escepticismo (GDD §4.4), tablón de misiones absurdas.
 - Más adelante: daily runs (seed por fecha), Ruleta de Engranajes, Contrabando, narrador con voz (ElevenLabs, acentos), itch.io/Steam Next Fest.
