@@ -180,6 +180,17 @@ Cada cameo es un evento con decisión mecánica real (ayudar/ignorar/explotar la
 
 ## 9. Especificaciones de arte (resumen ejecutivo)
 
+### 9.0 Dirección de personajes: sátira sin asco
+
+Regla maestra: **el poder es caricatura; el pueblo es humano.** El nivel de exageración de un personaje lo dicta su posición en la pirámide, no la palabra «sátira»:
+
+- **Las víctimas del sistema** (aprendices, campesinos, mercenarios de a pie, los 4 héroes jugables) se dibujan como **personas normales, atractivas o dignas** — cansadas, remendadas, pero humanas. Un campesino se ve como un campesino, no como una criatura. La sátira duele más cuando el explotado tiene cara de persona.
+- **Los que ostentan poder** (recaudadores, juntas, jefes, clero alto) admiten **caricatura grotesca-cómica**: papadas, pelucas torcidas, monóculos que agrandan el ojo. Límite duro: grotesco ≠ asqueroso. Nada de deformidad repulsiva, babas, ni rasgos que den grima — la meta es la risa, no el rechazo.
+- **La nobleza y la Corona** (Acto 3, el Barón) van al extremo opuesto: **refinados, esbeltos y andróginos hasta lo absurdo** — belleza hegemónica pulida como sátira en sí misma (tan perfectos que dan desconfianza). Elegancia excesiva, poses de retrato, ni un pelo fuera de lugar.
+- **Máquinas y autómatas**: encanto torpe (el Gólem), nunca horror corporal.
+
+En prompts de IA: para pueblo/héroes evitar «grotesque/creature»; usar «sympathetic, dignified, normal human proportions, tired but charming». Para poder: «caricature, pompous, exaggerated features, comedic — NOT disgusting, NOT creepy». Para nobleza: «androgynous, elegant, porcelain-perfect, unsettlingly beautiful».
+
 - Resolución interna **640×360**, escalado entero, `pixelArt: true`.
 - Héroes **96×96**, enemigos 64-96, jefes 128-160. PixelLab: generar a 128, animar con esqueleto (≤128). Set por enemigo: idle 2-4f, attack 4-6f, death 4-6f; el "hit" es tint-flash + knockback por código.
 - **Paleta maestra Resurrect 64**; verde-gas reservado a lo tóxico; cuantización Pillow sin dithering; BitForge con paleta forzada.
