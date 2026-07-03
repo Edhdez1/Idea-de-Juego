@@ -30,7 +30,7 @@ interface VistaUnidad {
   intentTxt?: Phaser.GameObjects.Text;
 }
 
-const SUELO_Y = 252;
+const SUELO_Y = 204;
 const MANO_Y = 336;
 
 export class CombatScene extends Phaser.Scene {
@@ -122,7 +122,7 @@ export class CombatScene extends Phaser.Scene {
     const cont = crearUnidad(this, x, SUELO_Y, defId, nombre);
 
     this.add
-      .text(x, SUELO_Y + 8, nombre, { fontFamily: 'monospace', fontSize: '9px', color: '#c9a86a' })
+      .text(x, SUELO_Y + 8, nombre, { fontFamily: 'monospace', fontSize: '7px', color: '#c9a86a' })
       .setOrigin(0.5, 0);
     this.add.rectangle(x, SUELO_Y + 22, 84, 7, 0x2a2027).setStrokeStyle(1, 0x4a3a30);
     const hpBar = this.add.rectangle(x - 41, SUELO_Y + 22, 82, 5, 0x9a3a2e).setOrigin(0, 0.5);

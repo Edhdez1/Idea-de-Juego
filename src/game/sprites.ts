@@ -21,6 +21,17 @@ export const SPRITE_FILES: { key: string; file: string }[] = [
   { key: 'inquisidor_patentes', file: 'assets/sprites/inquisidor_patentes.png' },
 ];
 
+/** Arte propio de cada carta (key = card_<defId>). */
+export const CARD_ART_FILES: { key: string; file: string }[] = [
+  'golpe_de_llave',
+  'plancha_remachada',
+  'motor_a_presion',
+  'valvula_de_escape',
+  'prototipo_inestable',
+  'pistola_de_remaches',
+  'turbina_de_taller',
+].map((id) => ({ key: `card_${id}`, file: `assets/cards/${id}.png` }));
+
 /**
  * Crea el visual de una unidad a escala 1 (pixel-perfect).
  * Si la textura falta, cae a un rectángulo con el nombre: el juego nunca

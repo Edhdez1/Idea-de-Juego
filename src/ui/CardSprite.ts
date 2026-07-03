@@ -46,22 +46,33 @@ export class CardSprite extends Phaser.GameObjects.Container {
     this.add([coste, costeTxt]);
 
     const nombre = scene.add
-      .text(6, -CARD_H / 2 + 12, def.name, {
+      .text(6, -CARD_H / 2 + 11, def.name, {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '7px',
         color: '#f4e4c1',
-        wordWrap: { width: CARD_W - 30 },
+        align: 'center',
+        wordWrap: { width: CARD_W - 28 },
       })
       .setOrigin(0.5, 0.5);
     this.add(nombre);
 
+    // Arte propio de la carta (estilo StS: ventana en la mitad superior)
+    const arteKey = `card_${def.id}`;
+    if (scene.textures.exists(arteKey)) {
+      const marcoArte = scene.add
+        .rectangle(0, -8, CARD_W - 8, 50, 0x1a1017)
+        .setStrokeStyle(1, 0x8a7350);
+      const arte = scene.add.image(0, -8, arteKey);
+      this.add([marcoArte, arte]);
+    }
+
     const descripcion = scene.add
-      .text(0, 8, def.description, {
+      .text(0, 38, def.description, {
         fontFamily: 'monospace',
-        fontSize: '9px',
+        fontSize: '8px',
         color: '#d8c8a8',
         align: 'center',
-        wordWrap: { width: CARD_W - 12 },
+        wordWrap: { width: CARD_W - 10 },
       })
       .setOrigin(0.5, 0.5);
     this.add(descripcion);
@@ -99,7 +110,7 @@ export class CardSprite extends Phaser.GameObjects.Container {
   }
 
   setSeleccionada(on: boolean): void {
-    this.y = on ? this.baseY - 16 : this.baseY;
+    this.y = on ? this.baseY - 56 : this.baseY;
     this.marco.setStrokeStyle(2, on ? 0xffe08a : 0xc9a86a);
     this.setDepth(on ? 100 : this.handIndex);
   }
