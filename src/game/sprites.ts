@@ -29,6 +29,20 @@ export const SPRITE_FILES: { key: string; file: string }[] = [
   { key: 'inquisidor_patentes', file: 'assets/sprites/inquisidor_patentes.png' },
 ];
 
+/** Paneles y retratos de la intro cinemática. */
+export const INTRO_FILES: { key: string; file: string }[] = [
+  { key: 'intro_1_amanecer', file: 'assets/intro/1_amanecer.webp' },
+  { key: 'intro_2_cielo', file: 'assets/intro/2_cielo.webp' },
+  { key: 'intro_3_crater', file: 'assets/intro/3_crater.webp' },
+  { key: 'intro_4_facciones', file: 'assets/intro/4_facciones.webp' },
+  { key: 'intro_5_goteras', file: 'assets/intro/5_goteras.webp' },
+  { key: 'intro_6_heroes', file: 'assets/intro/6_heroes.webp' },
+  { key: 'retrato_ingeniera', file: 'assets/intro/retrato_ingeniera.webp' },
+  { key: 'retrato_clerigo', file: 'assets/intro/retrato_clerigo.webp' },
+  { key: 'retrato_historiadora', file: 'assets/intro/retrato_historiadora.webp' },
+  { key: 'retrato_reparador', file: 'assets/intro/retrato_reparador.webp' },
+];
+
 /** Fondos de combate por encuentro (320×180, se muestran a escala 2). */
 export const BG_FILES: { key: string; file: string }[] = [
   { key: 'bg_taller_gremio', file: 'assets/bg/taller_gremio.png' },

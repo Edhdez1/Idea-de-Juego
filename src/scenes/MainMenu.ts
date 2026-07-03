@@ -48,5 +48,17 @@ export class MainMenuScene extends Phaser.Scene {
     jugar.on('pointerover', () => jugar.setColor('#ffe08a'));
     jugar.on('pointerout', () => jugar.setColor('#f4e4c1'));
     jugar.on('pointerdown', () => this.scene.start('Combat', COMBATE_INICIAL));
+
+    const verIntro = this.add
+      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 78, 'ver intro', {
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        color: '#a08662',
+      })
+      .setOrigin(0.5)
+      .setInteractive({ useHandCursor: true });
+    verIntro.on('pointerover', () => verIntro.setColor('#e8c170'));
+    verIntro.on('pointerout', () => verIntro.setColor('#a08662'));
+    verIntro.on('pointerdown', () => this.scene.start('Intro'));
   }
 }
