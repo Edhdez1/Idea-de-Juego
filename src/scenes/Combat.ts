@@ -61,8 +61,21 @@ export class CombatScene extends Phaser.Scene {
     controller.newCombat(this.encounterId, this.seed);
     controller.onInvalid = (msg) => this.mostrarAviso(msg);
 
-    // Fondo sencillo: taller a oscuras + línea de suelo
+    // Fondo del encuentro (pixel art 320×180 a escala 2) con velo para legibilidad
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x241a20);
+    if (this.textures.exists('bg_taller_gremio')) {
+      this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, 'bg_taller_gremio').setScale(2);
+      // velo superior (intents/HUD) e inferior (nombres, barras y mano)
+      this.add.rectangle(GAME_WIDTH / 2, 30, GAME_WIDTH, 60, 0x1a1017, 0.55);
+      this.add.rectangle(
+        GAME_WIDTH / 2,
+        (SUELO_Y + GAME_HEIGHT) / 2 + 4,
+        GAME_WIDTH,
+        GAME_HEIGHT - SUELO_Y,
+        0x1a1017,
+        0.72,
+      );
+    }
     this.add.rectangle(GAME_WIDTH / 2, SUELO_Y + 2, GAME_WIDTH, 2, 0x4a3a30);
 
     this.numeros = new DamageNumbers(this);
