@@ -35,7 +35,7 @@ export const APRENDIZ_EXPLOTADO: EnemyDef = {
 export const GOLEM_LATON_DEFECTUOSO: EnemyDef = {
   id: 'golem_laton_defectuoso',
   name: 'Gólem de Latón Defectuoso',
-  hp: [40, 46],
+  hp: [34, 40],
   patron: 'secuencial',
   flavor: 'Salió de fábrica con tres tornillos de menos. Nadie firmó el acta de entrega.',
   moves: [
@@ -63,7 +63,7 @@ export const GOLEM_LATON_DEFECTUOSO: EnemyDef = {
 export const RECAUDADOR: EnemyDef = {
   id: 'recaudador',
   name: 'El Recaudador',
-  hp: [32, 38],
+  hp: [44, 50],
   patron: 'secuencial',
   flavor: 'No es personal. Es interés compuesto.',
   moves: [
@@ -116,7 +116,7 @@ export const INQUISIDOR_PATENTES: EnemyDef = {
 export const GRAN_MAESTRE: EnemyDef = {
   id: 'gran_maestre',
   name: 'el Gran Maestre del Gremio',
-  hp: [70, 78],
+  hp: [84, 92],
   patron: 'secuencial',
   flavor:
     'Custodia el Coso porque «es una patente robada, obviamente». Lleva cuarenta años sin inventar nada: firmar también es crear, dice.',
