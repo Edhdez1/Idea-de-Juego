@@ -8,8 +8,8 @@ import Phaser from 'phaser';
 
 /** Archivos de audio (cargados en Preload con loaderror → warn). */
 export const AUDIO_FILES: { key: string; file: string }[] = [
-  { key: 'musica_taberna', file: 'assets/audio/musica_taberna.ogg' },
-  { key: 'musica_combate', file: 'assets/audio/musica_combate.ogg' },
+  { key: 'musica_taberna', file: 'assets/audio/musica_taberna.wav' },
+  { key: 'musica_combate', file: 'assets/audio/musica_combate.wav' },
   { key: 'sfx_carta', file: 'assets/audio/sfx_carta.wav' },
   { key: 'sfx_robo', file: 'assets/audio/sfx_robo.wav' },
   { key: 'sfx_golpe', file: 'assets/audio/sfx_golpe.wav' },

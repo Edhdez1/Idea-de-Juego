@@ -17,14 +17,20 @@ declare global {
  */
 test('jugar una carta y terminar el turno sin errores', async ({ page }) => {
   const errores: string[] = [];
+  // Los assets opcionales (audio, sprites aún no generados) pueden faltar:
+  // ni el 404 del navegador ni el fallo de decodificación de un audio
+  // ausente son errores del juego — hay fallback silencioso para ambos.
+  const esRuidoDeAsset = (texto: string): boolean =>
+    texto.includes('Failed to load resource') ||
+    texto.includes('Error decoding audio') ||
+    texto.includes('Failed to process file') ||
+    texto.includes('Unable to decode audio data');
   page.on('console', (msg) => {
-    // Los assets opcionales (audio, sprites aún no generados) pueden faltar:
-    // el 404 del navegador no es un error del juego — hay fallback silencioso.
-    if (msg.type() === 'error' && !msg.text().includes('Failed to load resource')) {
-      errores.push(msg.text());
-    }
+    if (msg.type() === 'error' && !esRuidoDeAsset(msg.text())) errores.push(msg.text());
   });
-  page.on('pageerror', (err) => errores.push(String(err)));
+  page.on('pageerror', (err) => {
+    if (!esRuidoDeAsset(String(err))) errores.push(String(err));
+  });
 
   await page.goto('/?test=1');
   await page.waitForFunction(() => window.__game?.ready === true);
