@@ -21,6 +21,21 @@ export function spriteKeyDe(defId: string): string {
  */
 const FLIP_X: Record<string, boolean> = {
   ingeniera: true,
+  golem_defectuoso: true,
+};
+
+/**
+ * Escala de presentación por sprite (los personajes deben imponer en
+ * pantalla; el Aprendiz queda chaparrito a propósito).
+ */
+const ESCALA: Record<string, number> = {
+  ingeniera: 1.3,
+  golem_defectuoso: 1.3,
+  recaudador: 1.25,
+  inquisidor_patentes: 1.3,
+  aprendiz_explotado: 1.0,
+  gran_maestre: 1.4,
+  brayan: 1.15,
 };
 
 export const SPRITE_FILES: { key: string; file: string }[] = [
@@ -92,9 +107,11 @@ export function crearUnidad(
   if (scene.textures.exists(key)) {
     const spr = scene.add.image(0, 0, key).setOrigin(0.5, 1);
     if (FLIP_X[key]) spr.setFlipX(true);
+    const escala = ESCALA[key] ?? 1;
+    spr.setScale(escala);
     cont.add(spr);
     cont.setData('sprite', spr);
-    cont.setSize(spr.width, spr.height);
+    cont.setSize(spr.width * escala, spr.height * escala);
   } else {
     const rect = scene.add.rectangle(0, -48, 72, 96, 0x5a4632).setOrigin(0.5, 0.5);
     const label = scene.add
