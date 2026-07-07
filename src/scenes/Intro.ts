@@ -1,10 +1,17 @@
 import Phaser from 'phaser';
-import { HABLANTES, PANELES_INTRO } from '../data/intro';
+import { HABLANTES, PANELES_PARTE1, PANELES_PARTE2, type PanelIntro } from '../data/intro';
 import { dur } from '../game/anim';
 import { GAME_HEIGHT, GAME_WIDTH } from '../game/constants';
 import { MODO_TEST } from '../game/test-hooks';
 
 const CAJA_H = 92;
+
+export interface IntroInitData {
+  /** 1 = La Caída del Coso (arranque). 2 = Los Cuatro (tras los primeros combates). */
+  parte?: 1 | 2;
+  /** A dónde ir al terminar (por defecto: MainMenu). */
+  luego?: { escena: string; data?: object };
+}
 
 /**
  * Intro cinemática estilo Darkest Dungeon: paneles ilustrados con paneo
@@ -23,15 +30,24 @@ export class IntroScene extends Phaser.Scene {
   private escribiendo?: Phaser.Time.TimerEvent;
   private textoCompleto = '';
   private terminada = false;
+  private paneles: PanelIntro[] = PANELES_PARTE1;
+  private parte: 1 | 2 = 1;
+  private luego: { escena: string; data?: object } | null = null;
 
   constructor() {
     super('Intro');
   }
 
+  init(data: IntroInitData): void {
+    this.parte = data.parte ?? 1;
+    this.paneles = this.parte === 2 ? PANELES_PARTE2 : PANELES_PARTE1;
+    this.luego = data.luego ?? null;
+  }
+
   create(): void {
     // El smoke E2E va directo al combate
     if (MODO_TEST) {
-      this.scene.start('MainMenu');
+      this.irAlFinal();
       return;
     }
     this.panelIdx = 0;
@@ -85,7 +101,7 @@ export class IntroScene extends Phaser.Scene {
   }
 
   private mostrarPanel(): void {
-    const panel = PANELES_INTRO[this.panelIdx];
+    const panel = this.paneles[this.panelIdx];
     if (!panel) {
       this.mostrarTitulo();
       return;
@@ -116,7 +132,7 @@ export class IntroScene extends Phaser.Scene {
   }
 
   private mostrarLinea(): void {
-    const panel = PANELES_INTRO[this.panelIdx];
+    const panel = this.paneles[this.panelIdx];
     const linea = panel?.lineas[this.lineaIdx];
     if (!panel || !linea) return;
 
@@ -166,7 +182,7 @@ export class IntroScene extends Phaser.Scene {
       this.texto.setText(this.textoCompleto);
       return;
     }
-    const panel = PANELES_INTRO[this.panelIdx];
+    const panel = this.paneles[this.panelIdx];
     if (!panel) return;
     this.lineaIdx += 1;
     if (this.lineaIdx < panel.lineas.length) {
@@ -178,6 +194,10 @@ export class IntroScene extends Phaser.Scene {
   }
 
   private mostrarTitulo(): void {
+    if (this.parte === 2) {
+      this.irAlFinal();
+      return;
+    }
     this.terminada = true;
     const velo = this.add
       .rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x0d0a0c, 0)
@@ -206,7 +226,12 @@ export class IntroScene extends Phaser.Scene {
   }
 
   private irAlMenu(): void {
+    this.irAlFinal();
+  }
+
+  private irAlFinal(): void {
     this.escribiendo?.remove();
-    this.scene.start('MainMenu');
+    if (this.luego) this.scene.start(this.luego.escena, this.luego.data);
+    else this.scene.start('MainMenu');
   }
 }

@@ -31,7 +31,11 @@ export const HABLANTES: Record<HablanteId, { nombre: string; color: string; retr
   reparador: { nombre: 'El Reparador No Autorizado', color: '#e88ad0', retrato: 'retrato_reparador' },
 };
 
-export const PANELES_INTRO: PanelIntro[] = [
+/**
+ * PARTE I — «La Caída del Coso»: toda la historia, se reproduce al abrir
+ * el juego y termina en la placa del título.
+ */
+export const PANELES_PARTE1: PanelIntro[] = [
   {
     key: 'intro_1_amanecer',
     zoom: { from: 1.0, to: 1.12 },
@@ -79,16 +83,27 @@ export const PANELES_INTRO: PanelIntro[] = [
       { hablante: 'narrador', texto: 'La burocracia ya tiene un formulario para eso. La cola da la vuelta a la catedral.' },
     ],
   },
+];
+
+/**
+ * PARTE II — «Los Cuatro»: se reproduce UNA sola vez, tras las primeras
+ * victorias de la run, cuando los caminos de los héroes se cruzan.
+ */
+export const PANELES_PARTE2: PanelIntro[] = [
   {
     key: 'intro_6_heroes',
     zoom: { from: 1.08, to: 1.0 },
     lineas: [
-      { hablante: 'narrador', texto: 'Y entre los caídos, los estafados y los desahuciados... cuatro almas decidieron subir la pirámide hasta el Coso.' },
+      { hablante: 'narrador', texto: 'Sobreviviste a los matones del Gremio. Enhorabuena: ya llamaste la atención equivocada.' },
+      { hablante: 'narrador', texto: 'Y no eres la única alma con malas ideas: entre los caídos, los estafados y los desahuciados... otros tres también suben la pirámide hacia el Coso.' },
       { hablante: 'ingeniera', texto: '¡Avemaría pues! Yo NO construí esa vaina... pero si resulta que vale plata, la patente es mía, ¿oyó, home?' },
       { hablante: 'clerigo', texto: 'La Freidora da, mare, y la Freidora quita el aceite. Y el diezmo... el diezmo lo recojo yo, ¿va?' },
       { hablante: 'historiadora', texto: 'Es un electrodoméstico de cocina. Calienta aire y lo hace circular. ¿Por qué aplauden? No... no aplaudan.' },
       { hablante: 'reparador', texto: 'Tranqui, papi. Yo la rooteo, le meto firmware pirata, y el reino entero paga suscripción. Plan Bendito.' },
-      { hablante: 'narrador', texto: 'Sus razones son igual de malas. Esta es su historia. Bueno... la historia de cómo la arruinan.' },
+      { hablante: 'narrador', texto: 'Sus razones son igual de malas. De momento cada quien va por su cuenta... pero la pirámide es estrecha, y arriba solo cabe una verdad.' },
     ],
   },
 ];
+
+/** Compatibilidad: la intro completa (para la versión compartible). */
+export const PANELES_INTRO: PanelIntro[] = [...PANELES_PARTE1, ...PANELES_PARTE2];
