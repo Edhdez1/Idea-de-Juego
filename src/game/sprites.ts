@@ -20,7 +20,6 @@ export function spriteKeyDe(defId: string): string {
  * combate (héroe → derecha, enemigos → izquierda): se voltean al crearse.
  */
 const FLIP_X: Record<string, boolean> = {
-  ingeniera: true,
   golem_defectuoso: true,
 };
 
