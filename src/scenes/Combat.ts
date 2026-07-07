@@ -7,8 +7,10 @@ import {
   type Intent,
 } from '../core';
 import { dur } from '../game/anim';
+import { detenerMusica, musica, sonar } from '../game/audio';
 import { GAME_HEIGHT, GAME_WIDTH } from '../game/constants';
 import { controller } from '../game/controller';
+import { borrarRun, guardarRun, obtenerRun, registrarVictoria } from '../game/run';
 import { crearUnidad } from '../game/sprites';
 import { conectarEscenaDeCombate } from '../game/test-hooks';
 import { CardSprite } from '../ui/CardSprite';
@@ -58,8 +60,22 @@ export class CombatScene extends Phaser.Scene {
   }
 
   create(): void {
-    controller.newCombat(this.encounterId, this.seed);
+    // Dentro de una run, el combate arranca con SU mazo y SU vida actual;
+    // suelto (MODO_TEST / smoke) cae al mazo inicial con 70 de vida.
+    const run = obtenerRun();
+    if (run) {
+      controller.newCombat(this.encounterId, this.seed, {
+        deck: run.deck,
+        playerHp: run.hpActual,
+        playerMaxHp: run.hpMax,
+      });
+    } else {
+      controller.newCombat(this.encounterId, this.seed);
+    }
     controller.onInvalid = (msg) => this.mostrarAviso(msg);
+
+    musica(this, 'musica_combate', { volume: 0.4 });
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => detenerMusica());
 
     // Fondo del encuentro (pixel art 320×180 a escala 2) con velo para legibilidad
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x241a20);
@@ -364,18 +380,25 @@ export class CombatScene extends Phaser.Scene {
 
   private async animarEvento(ev: GameEvent): Promise<void> {
     switch (ev.type) {
+      case 'CardPlayed': {
+        sonar(this, 'sfx_carta');
+        return;
+      }
       case 'DamageDealt': {
+        sonar(this, 'sfx_golpe');
         const vista = this.enemigos[ev.targetSlot];
         if (vista) await this.golpe(vista, ev.amount, ev.blocked);
         this.refrescarUnidades();
         return;
       }
       case 'PlayerDamaged': {
+        sonar(this, 'sfx_golpe');
         await this.golpe(this.heroe, ev.amount, ev.blocked, ev.source === 'poison' ? '#8ae87a' : '#ff5a3c');
         this.refrescarUnidades();
         return;
       }
       case 'BlockGained': {
+        sonar(this, 'sfx_bloqueo');
         const vista = ev.who === 'player' ? this.heroe : this.enemigos[ev.who];
         if (vista) this.numeros.mostrar(vista.cont.x, SUELO_Y - 110, `+${ev.amount}`, '#7ab8e8');
         this.refrescarUnidades();
@@ -388,6 +411,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(120);
       }
       case 'CardsDrawn': {
+        sonar(this, 'sfx_robo');
         this.reconstruirMano();
         // entrada con stagger desde abajo
         this.cartas.forEach((c, i) => {
@@ -415,6 +439,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(60);
       }
       case 'Overload': {
+        sonar(this, 'sfx_explosion');
         this.cameras.main.flash(dur(120), 255, 240, 220);
         this.cameras.main.shake(dur(200), 0.012);
         this.numeros.mostrar(this.heroe.cont.x, SUELO_Y - 120, `-${ev.damage}`, '#ffb347');
@@ -425,6 +450,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(350);
       }
       case 'CardExploded': {
+        sonar(this, 'sfx_explosion');
         this.cameras.main.shake(dur(160), 0.01);
         this.numeros.mostrar(this.heroe.cont.x, SUELO_Y - 120, `-${ev.damage}`, '#ff5a3c');
         this.refrescarUnidades();
@@ -473,6 +499,26 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private mostrarFinal(resultado: 'victory' | 'defeat'): void {
+    sonar(this, resultado === 'victory' ? 'sfx_victoria' : 'sfx_derrota');
+
+    // Dentro de una run el combate desemboca en el loop completo:
+    // victoria → botín (o final de acto tras el jefe); derrota → game over.
+    const run = obtenerRun();
+    if (run && run.nodoActual !== null) {
+      this.scene.stop('HUD');
+      if (resultado === 'victory') {
+        const nodo = registrarVictoria(run, controller.getState().player.hp);
+        guardarRun(run);
+        if (nodo.tipo === 'jefe') this.scene.start('Victory');
+        else this.scene.start('Reward', { nodoId: nodo.id });
+      } else {
+        borrarRun();
+        this.scene.start('GameOver');
+      }
+      return;
+    }
+
+    // Combate suelto (MODO_TEST): panel simple con reintento.
     const linea =
       resultado === 'victory'
         ? '«Enhorabuena. El Gremio enviará la factura por daños.»'

@@ -26,6 +26,11 @@ export const ACTO1_ENCOUNTERS: EncounterDef[] = [
     name: 'Auditoría Sorpresa',
     enemies: ['inquisidor_patentes', 'aprendiz_explotado'],
   },
+  {
+    id: 'jefe_gran_maestre',
+    name: 'El Gran Maestre del Gremio',
+    enemies: ['gran_maestre'],
+  },
 ];
 
 /** 12 cartas: 5 golpes, 4 planchas y una de cada especial. */

@@ -31,13 +31,18 @@ export class GameController {
     return this._seed;
   }
 
-  newCombat(encounterId: string, seed: number): GameEvent[] {
+  newCombat(
+    encounterId: string,
+    seed: number,
+    opciones?: { deck?: readonly string[]; playerHp?: number; playerMaxHp?: number },
+  ): GameEvent[] {
     const enc = ACTO1_ENCOUNTERS.find((e) => e.id === encounterId);
     if (!enc) throw new Error(`Encuentro desconocido: ${encounterId}`);
     this._seed = seed;
     const { state, events } = createCombat({
-      playerHp: 70,
-      deck: MAZO_INICIAL_INGENIERA,
+      playerHp: opciones?.playerHp ?? 70,
+      playerMaxHp: opciones?.playerMaxHp,
+      deck: opciones?.deck ?? MAZO_INICIAL_INGENIERA,
       enemies: enc.enemies,
       registry: this.registry,
       runSeed: seed,

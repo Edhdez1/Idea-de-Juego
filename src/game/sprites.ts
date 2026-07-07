@@ -7,6 +7,8 @@ const SPRITE_KEYS: Record<string, string> = {
   golem_laton_defectuoso: 'golem_defectuoso',
   recaudador: 'recaudador',
   inquisidor_patentes: 'inquisidor_patentes',
+  gran_maestre: 'gran_maestre',
+  brayan: 'brayan',
 };
 
 export function spriteKeyDe(defId: string): string {
@@ -27,6 +29,8 @@ export const SPRITE_FILES: { key: string; file: string }[] = [
   { key: 'golem_defectuoso', file: 'assets/sprites/golem_defectuoso.png' },
   { key: 'recaudador', file: 'assets/sprites/recaudador.png' },
   { key: 'inquisidor_patentes', file: 'assets/sprites/inquisidor_patentes.png' },
+  { key: 'gran_maestre', file: 'assets/sprites/gran_maestre.png' },
+  { key: 'brayan', file: 'assets/sprites/brayan.png' },
 ];
 
 /** Paneles y retratos de la intro cinemática. */
@@ -41,6 +45,7 @@ export const INTRO_FILES: { key: string; file: string }[] = [
   { key: 'retrato_clerigo', file: 'assets/intro/retrato_clerigo.webp' },
   { key: 'retrato_historiadora', file: 'assets/intro/retrato_historiadora.webp' },
   { key: 'retrato_reparador', file: 'assets/intro/retrato_reparador.webp' },
+  { key: 'retrato_brayan', file: 'assets/intro/retrato_brayan.webp' },
 ];
 
 /** Fondos de combate por encuentro (320×180, se muestran a escala 2). */
