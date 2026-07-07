@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { PRESSURE_MAX } from '../core';
 import { dur } from '../game/anim';
+import { sonar } from '../game/audio';
 import { GAME_WIDTH } from '../game/constants';
 import { controller } from '../game/controller';
 
@@ -49,7 +50,10 @@ export class HUDScene extends Phaser.Scene {
       .setOrigin(1, 0.5)
       .setInteractive({ useHandCursor: true });
     this.finBtn.on('pointerdown', () => {
-      if (this.finBtn.alpha === 1) this.game.events.emit('combat:endturn');
+      if (this.finBtn.alpha === 1) {
+        sonar(this, 'sfx_click');
+        this.game.events.emit('combat:endturn');
+      }
     });
 
     this.game.events.on('hud:refresh', this.refrescar, this);

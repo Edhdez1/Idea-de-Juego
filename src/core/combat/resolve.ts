@@ -65,6 +65,8 @@ const STARTING_ENERGY = 3;
 
 export function createCombat(opts: {
   playerHp: number;
+  /** Vida máxima del héroe; por defecto igual a playerHp (combate suelto). */
+  playerMaxHp?: number;
   deck: readonly string[];
   /** Ids de EnemyDef; el hp concreto se elige con el stream rng 'combat'. */
   enemies: readonly string[];
@@ -85,7 +87,7 @@ export function createCombat(opts: {
   });
 
   const state: CombatState = {
-    player: { hp: opts.playerHp, maxHp: opts.playerHp, block: 0, statuses: {} },
+    player: { hp: opts.playerHp, maxHp: opts.playerMaxHp ?? opts.playerHp, block: 0, statuses: {} },
     enemies: [],
     energy: STARTING_ENERGY,
     maxEnergy: STARTING_ENERGY,

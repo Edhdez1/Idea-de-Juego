@@ -7,10 +7,13 @@ import {
   type Intent,
 } from '../core';
 import { dur } from '../game/anim';
+import { detenerMusica, musica, sonar } from '../game/audio';
 import { GAME_HEIGHT, GAME_WIDTH } from '../game/constants';
 import { controller } from '../game/controller';
+import { borrarRun, guardarRun, obtenerRun, registrarVictoria } from '../game/run';
 import { crearUnidad } from '../game/sprites';
 import { conectarEscenaDeCombate } from '../game/test-hooks';
+import { CajaDialogo } from '../ui/CajaDialogo';
 import { CardSprite } from '../ui/CardSprite';
 import { layoutMano } from '../ui/HandLayout';
 import { DamageNumbers } from '../ui/fx/DamageNumbers';
@@ -46,6 +49,7 @@ export class CombatScene extends Phaser.Scene {
 
   /** Carta seleccionada esperando objetivo/confirmación. */
   private seleccion: { index: number; overclock: boolean } | null = null;
+  private faseJefeDicha = false;
   private botonesOc: Phaser.GameObjects.Text[] = [];
 
   constructor() {
@@ -55,11 +59,26 @@ export class CombatScene extends Phaser.Scene {
   init(data: Partial<CombatInitData>): void {
     if (data.encounterId) this.encounterId = data.encounterId;
     if (data.seed !== undefined) this.seed = data.seed;
+    this.faseJefeDicha = false;
   }
 
   create(): void {
-    controller.newCombat(this.encounterId, this.seed);
+    // Dentro de una run, el combate arranca con SU mazo y SU vida actual;
+    // suelto (MODO_TEST / smoke) cae al mazo inicial con 70 de vida.
+    const run = obtenerRun();
+    if (run) {
+      controller.newCombat(this.encounterId, this.seed, {
+        deck: run.deck,
+        playerHp: run.hpActual,
+        playerMaxHp: run.hpMax,
+      });
+    } else {
+      controller.newCombat(this.encounterId, this.seed);
+    }
     controller.onInvalid = (msg) => this.mostrarAviso(msg);
+
+    musica(this, 'musica_combate', { volume: 0.4 });
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => detenerMusica());
 
     // Fondo del encuentro (pixel art 320×180 a escala 2) con velo para legibilidad
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x241a20);
@@ -116,6 +135,23 @@ export class CombatScene extends Phaser.Scene {
     });
 
     conectarEscenaDeCombate((intent) => this.despachar(intent));
+
+    // El Gran Maestre defiende su explicación del Coso en persona
+    if (this.encounterId === 'jefe_gran_maestre') {
+      new CajaDialogo(this, [
+        {
+          nombre: 'El Gran Maestre del Gremio',
+          color: '#ffd27a',
+          texto:
+            '¿Una desahuciada en MI distrito? El Coso es propiedad del Gremio: modelo VPR-88. La documentación se quemó... lo cual demuestra que existía.',
+        },
+        {
+          nombre: 'El Narrador',
+          color: '#e8c170',
+          texto: 'Prepárate. Los abogados de este señor golpean primero y facturan después.',
+        },
+      ]);
+    }
   }
 
   // ---------- construcción de vistas ----------
@@ -123,9 +159,9 @@ export class CombatScene extends Phaser.Scene {
   private construirUnidades(): void {
     const s = controller.getState();
 
-    this.heroe = this.crearVista(110, 'ingeniera', 'La Ingeniera', undefined);
+    this.heroe = this.crearVista(118, 'ingeniera', 'La Ingeniera', undefined);
     this.enemigos = s.enemies.map((e, i) => {
-      const x = s.enemies.length === 1 ? 470 : 420 + i * 105;
+      const x = s.enemies.length === 1 ? 478 : 412 + i * 132;
       return this.crearVista(x, e.defId, e.name, i);
     });
     this.refrescarUnidades();
@@ -151,8 +187,14 @@ export class CombatScene extends Phaser.Scene {
 
     let intentTxt: Phaser.GameObjects.Text | undefined;
     if (slot !== undefined) {
+      // El intent flota justo encima del sprite, sea cual sea su altura
+      const alturaSprite = cont.height > 0 ? cont.height : 128;
       intentTxt = this.add
-        .text(x, SUELO_Y - 148, '', { fontFamily: 'monospace', fontSize: '11px', color: '#ff8a5c' })
+        .text(x, SUELO_Y - alturaSprite - 6, '', {
+          fontFamily: 'monospace',
+          fontSize: '11px',
+          color: '#ff8a5c',
+        })
         .setOrigin(0.5, 1);
       cont.setInteractive({ useHandCursor: true });
       cont.on('pointerdown', () => this.tapEnemigo(slot));
@@ -364,18 +406,38 @@ export class CombatScene extends Phaser.Scene {
 
   private async animarEvento(ev: GameEvent): Promise<void> {
     switch (ev.type) {
+      case 'CardPlayed': {
+        sonar(this, 'sfx_carta');
+        return;
+      }
       case 'DamageDealt': {
+        sonar(this, 'sfx_golpe');
         const vista = this.enemigos[ev.targetSlot];
         if (vista) await this.golpe(vista, ev.amount, ev.blocked);
         this.refrescarUnidades();
+        if (this.encounterId === 'jefe_gran_maestre' && !this.faseJefeDicha) {
+          const jefe = controller.getState().enemies[0];
+          if (jefe && jefe.hp > 0 && jefe.hp < jefe.maxHp * 0.45) {
+            this.faseJefeDicha = true;
+            new CajaDialogo(this, [
+              {
+                nombre: 'El Gran Maestre del Gremio',
+                color: '#ffd27a',
+                texto: '¡¿Dónde está mi SELLO DE URGENCIA?! ¡Esto es un atropello sin cita previa!',
+              },
+            ]);
+          }
+        }
         return;
       }
       case 'PlayerDamaged': {
+        sonar(this, 'sfx_golpe');
         await this.golpe(this.heroe, ev.amount, ev.blocked, ev.source === 'poison' ? '#8ae87a' : '#ff5a3c');
         this.refrescarUnidades();
         return;
       }
       case 'BlockGained': {
+        sonar(this, 'sfx_bloqueo');
         const vista = ev.who === 'player' ? this.heroe : this.enemigos[ev.who];
         if (vista) this.numeros.mostrar(vista.cont.x, SUELO_Y - 110, `+${ev.amount}`, '#7ab8e8');
         this.refrescarUnidades();
@@ -388,6 +450,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(120);
       }
       case 'CardsDrawn': {
+        sonar(this, 'sfx_robo');
         this.reconstruirMano();
         // entrada con stagger desde abajo
         this.cartas.forEach((c, i) => {
@@ -415,6 +478,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(60);
       }
       case 'Overload': {
+        sonar(this, 'sfx_explosion');
         this.cameras.main.flash(dur(120), 255, 240, 220);
         this.cameras.main.shake(dur(200), 0.012);
         this.numeros.mostrar(this.heroe.cont.x, SUELO_Y - 120, `-${ev.damage}`, '#ffb347');
@@ -425,6 +489,7 @@ export class CombatScene extends Phaser.Scene {
         return this.espera(350);
       }
       case 'CardExploded': {
+        sonar(this, 'sfx_explosion');
         this.cameras.main.shake(dur(160), 0.01);
         this.numeros.mostrar(this.heroe.cont.x, SUELO_Y - 120, `-${ev.damage}`, '#ff5a3c');
         this.refrescarUnidades();
@@ -473,6 +538,26 @@ export class CombatScene extends Phaser.Scene {
   }
 
   private mostrarFinal(resultado: 'victory' | 'defeat'): void {
+    sonar(this, resultado === 'victory' ? 'sfx_victoria' : 'sfx_derrota');
+
+    // Dentro de una run el combate desemboca en el loop completo:
+    // victoria → botín (o final de acto tras el jefe); derrota → game over.
+    const run = obtenerRun();
+    if (run && run.nodoActual !== null) {
+      this.scene.stop('HUD');
+      if (resultado === 'victory') {
+        const nodo = registrarVictoria(run, controller.getState().player.hp);
+        guardarRun(run);
+        if (nodo.tipo === 'jefe') this.scene.start('Victory');
+        else this.scene.start('Reward', { nodoId: nodo.id });
+      } else {
+        borrarRun();
+        this.scene.start('GameOver');
+      }
+      return;
+    }
+
+    // Combate suelto (MODO_TEST): panel simple con reintento.
     const linea =
       resultado === 'victory'
         ? '«Enhorabuena. El Gremio enviará la factura por daños.»'

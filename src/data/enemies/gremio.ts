@@ -35,7 +35,7 @@ export const APRENDIZ_EXPLOTADO: EnemyDef = {
 export const GOLEM_LATON_DEFECTUOSO: EnemyDef = {
   id: 'golem_laton_defectuoso',
   name: 'Gólem de Latón Defectuoso',
-  hp: [40, 46],
+  hp: [34, 40],
   patron: 'secuencial',
   flavor: 'Salió de fábrica con tres tornillos de menos. Nadie firmó el acta de entrega.',
   moves: [
@@ -63,7 +63,7 @@ export const GOLEM_LATON_DEFECTUOSO: EnemyDef = {
 export const RECAUDADOR: EnemyDef = {
   id: 'recaudador',
   name: 'El Recaudador',
-  hp: [32, 38],
+  hp: [44, 50],
   patron: 'secuencial',
   flavor: 'No es personal. Es interés compuesto.',
   moves: [
@@ -113,10 +113,49 @@ export const INQUISIDOR_PATENTES: EnemyDef = {
   ],
 };
 
+export const GRAN_MAESTRE: EnemyDef = {
+  id: 'gran_maestre',
+  name: 'el Gran Maestre del Gremio',
+  hp: [84, 92],
+  patron: 'secuencial',
+  flavor:
+    'Custodia el Coso porque «es una patente robada, obviamente». Lleva cuarenta años sin inventar nada: firmar también es crear, dice.',
+  moves: [
+    {
+      id: 'sello_de_denegacion',
+      name: 'Sello de Denegación',
+      intent: 'attack',
+      effects: [{ kind: 'attack', amount: 12 }],
+    },
+    {
+      id: 'burocracia_defensiva',
+      name: 'Burocracia Defensiva',
+      intent: 'defend',
+      effects: [{ kind: 'block', amount: 12 }],
+    },
+    {
+      id: 'auditoria_general',
+      name: 'Auditoría General',
+      intent: 'attack',
+      effects: [
+        { kind: 'attack', amount: 6, times: 2 },
+        { kind: 'applyStatus', status: 'weak', stacks: 1, to: 'player' },
+      ],
+    },
+    {
+      id: 'grito_de_patente',
+      name: 'Grito de Patente',
+      intent: 'buff',
+      effects: [{ kind: 'applyStatus', status: 'strength', stacks: 3, to: 'self' }],
+    },
+  ],
+};
+
 /** Bestiario completo del Acto 1 para registrar de una vez. */
 export const GREMIO_ENEMIES: EnemyDef[] = [
   APRENDIZ_EXPLOTADO,
   GOLEM_LATON_DEFECTUOSO,
   RECAUDADOR,
   INQUISIDOR_PATENTES,
+  GRAN_MAESTRE,
 ];

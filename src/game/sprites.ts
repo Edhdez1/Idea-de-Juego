@@ -7,6 +7,8 @@ const SPRITE_KEYS: Record<string, string> = {
   golem_laton_defectuoso: 'golem_defectuoso',
   recaudador: 'recaudador',
   inquisidor_patentes: 'inquisidor_patentes',
+  gran_maestre: 'gran_maestre',
+  brayan: 'brayan',
 };
 
 export function spriteKeyDe(defId: string): string {
@@ -18,7 +20,21 @@ export function spriteKeyDe(defId: string): string {
  * combate (héroe → derecha, enemigos → izquierda): se voltean al crearse.
  */
 const FLIP_X: Record<string, boolean> = {
-  ingeniera: true,
+  golem_defectuoso: true,
+};
+
+/**
+ * Escala de presentación por sprite (los personajes deben imponer en
+ * pantalla; el Aprendiz queda chaparrito a propósito).
+ */
+const ESCALA: Record<string, number> = {
+  ingeniera: 1.3,
+  golem_defectuoso: 1.3,
+  recaudador: 1.25,
+  inquisidor_patentes: 1.3,
+  aprendiz_explotado: 1.0,
+  gran_maestre: 1.4,
+  brayan: 1.15,
 };
 
 export const SPRITE_FILES: { key: string; file: string }[] = [
@@ -27,6 +43,8 @@ export const SPRITE_FILES: { key: string; file: string }[] = [
   { key: 'golem_defectuoso', file: 'assets/sprites/golem_defectuoso.png' },
   { key: 'recaudador', file: 'assets/sprites/recaudador.png' },
   { key: 'inquisidor_patentes', file: 'assets/sprites/inquisidor_patentes.png' },
+  { key: 'gran_maestre', file: 'assets/sprites/gran_maestre.png' },
+  { key: 'brayan', file: 'assets/sprites/brayan.png' },
 ];
 
 /** Paneles y retratos de la intro cinemática. */
@@ -41,12 +59,24 @@ export const INTRO_FILES: { key: string; file: string }[] = [
   { key: 'retrato_clerigo', file: 'assets/intro/retrato_clerigo.webp' },
   { key: 'retrato_historiadora', file: 'assets/intro/retrato_historiadora.webp' },
   { key: 'retrato_reparador', file: 'assets/intro/retrato_reparador.webp' },
+  { key: 'retrato_brayan', file: 'assets/intro/retrato_brayan.webp' },
 ];
 
 /** Fondos de combate por encuentro (320×180, se muestran a escala 2). */
 export const BG_FILES: { key: string; file: string }[] = [
   { key: 'bg_taller_gremio', file: 'assets/bg/taller_gremio.png' },
+  { key: 'bg_taberna', file: 'assets/bg/taberna.png' },
+  { key: 'bg_mapa_distrito', file: 'assets/bg/mapa_distrito.png' },
 ];
+
+/** Iconos pixel de los nodos del mapa. */
+export const UI_FILES: { key: string; file: string }[] = [
+  'combate',
+  'elite',
+  'taberna',
+  'descanso',
+  'jefe',
+].map((t) => ({ key: `icono_${t}`, file: `assets/ui/icono_${t}.png` }));
 
 /** Arte propio de cada carta (key = card_<defId>). */
 export const CARD_ART_FILES: { key: string; file: string }[] = [
@@ -76,9 +106,11 @@ export function crearUnidad(
   if (scene.textures.exists(key)) {
     const spr = scene.add.image(0, 0, key).setOrigin(0.5, 1);
     if (FLIP_X[key]) spr.setFlipX(true);
+    const escala = ESCALA[key] ?? 1;
+    spr.setScale(escala);
     cont.add(spr);
     cont.setData('sprite', spr);
-    cont.setSize(spr.width, spr.height);
+    cont.setSize(spr.width * escala, spr.height * escala);
   } else {
     const rect = scene.add.rectangle(0, -48, 72, 96, 0x5a4632).setOrigin(0.5, 0.5);
     const label = scene.add
