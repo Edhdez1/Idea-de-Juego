@@ -13,6 +13,7 @@ import { controller } from '../game/controller';
 import { borrarRun, guardarRun, obtenerRun, registrarVictoria } from '../game/run';
 import { crearUnidad } from '../game/sprites';
 import { conectarEscenaDeCombate } from '../game/test-hooks';
+import { CajaDialogo } from '../ui/CajaDialogo';
 import { CardSprite } from '../ui/CardSprite';
 import { layoutMano } from '../ui/HandLayout';
 import { DamageNumbers } from '../ui/fx/DamageNumbers';
@@ -48,6 +49,7 @@ export class CombatScene extends Phaser.Scene {
 
   /** Carta seleccionada esperando objetivo/confirmación. */
   private seleccion: { index: number; overclock: boolean } | null = null;
+  private faseJefeDicha = false;
   private botonesOc: Phaser.GameObjects.Text[] = [];
 
   constructor() {
@@ -57,6 +59,7 @@ export class CombatScene extends Phaser.Scene {
   init(data: Partial<CombatInitData>): void {
     if (data.encounterId) this.encounterId = data.encounterId;
     if (data.seed !== undefined) this.seed = data.seed;
+    this.faseJefeDicha = false;
   }
 
   create(): void {
@@ -132,6 +135,23 @@ export class CombatScene extends Phaser.Scene {
     });
 
     conectarEscenaDeCombate((intent) => this.despachar(intent));
+
+    // El Gran Maestre defiende su explicación del Coso en persona
+    if (this.encounterId === 'jefe_gran_maestre') {
+      new CajaDialogo(this, [
+        {
+          nombre: 'El Gran Maestre del Gremio',
+          color: '#ffd27a',
+          texto:
+            '¿Una desahuciada en MI distrito? El Coso es propiedad del Gremio: modelo VPR-88. La documentación se quemó... lo cual demuestra que existía.',
+        },
+        {
+          nombre: 'El Narrador',
+          color: '#e8c170',
+          texto: 'Prepárate. Los abogados de este señor golpean primero y facturan después.',
+        },
+      ]);
+    }
   }
 
   // ---------- construcción de vistas ----------
@@ -139,9 +159,9 @@ export class CombatScene extends Phaser.Scene {
   private construirUnidades(): void {
     const s = controller.getState();
 
-    this.heroe = this.crearVista(110, 'ingeniera', 'La Ingeniera', undefined);
+    this.heroe = this.crearVista(118, 'ingeniera', 'La Ingeniera', undefined);
     this.enemigos = s.enemies.map((e, i) => {
-      const x = s.enemies.length === 1 ? 470 : 420 + i * 105;
+      const x = s.enemies.length === 1 ? 478 : 412 + i * 132;
       return this.crearVista(x, e.defId, e.name, i);
     });
     this.refrescarUnidades();
@@ -167,8 +187,14 @@ export class CombatScene extends Phaser.Scene {
 
     let intentTxt: Phaser.GameObjects.Text | undefined;
     if (slot !== undefined) {
+      // El intent flota justo encima del sprite, sea cual sea su altura
+      const alturaSprite = cont.height > 0 ? cont.height : 128;
       intentTxt = this.add
-        .text(x, SUELO_Y - 148, '', { fontFamily: 'monospace', fontSize: '11px', color: '#ff8a5c' })
+        .text(x, SUELO_Y - alturaSprite - 6, '', {
+          fontFamily: 'monospace',
+          fontSize: '11px',
+          color: '#ff8a5c',
+        })
         .setOrigin(0.5, 1);
       cont.setInteractive({ useHandCursor: true });
       cont.on('pointerdown', () => this.tapEnemigo(slot));
@@ -389,6 +415,19 @@ export class CombatScene extends Phaser.Scene {
         const vista = this.enemigos[ev.targetSlot];
         if (vista) await this.golpe(vista, ev.amount, ev.blocked);
         this.refrescarUnidades();
+        if (this.encounterId === 'jefe_gran_maestre' && !this.faseJefeDicha) {
+          const jefe = controller.getState().enemies[0];
+          if (jefe && jefe.hp > 0 && jefe.hp < jefe.maxHp * 0.45) {
+            this.faseJefeDicha = true;
+            new CajaDialogo(this, [
+              {
+                nombre: 'El Gran Maestre del Gremio',
+                color: '#ffd27a',
+                texto: '¡¿Dónde está mi SELLO DE URGENCIA?! ¡Esto es un atropello sin cita previa!',
+              },
+            ]);
+          }
+        }
         return;
       }
       case 'PlayerDamaged': {

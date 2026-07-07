@@ -27,7 +27,7 @@ export class VictoryScene extends Phaser.Scene {
       .text(
         GAME_WIDTH / 2,
         166,
-        '«Desmentiste al Gremio. Su explicación era mentira...\nla de la Iglesia es peor. Continuará.»\n— el Narrador',
+        '«...la patente... era... auténtica...» — el Gran Maestre, con su último vapor.\n\n«Desmentiste al Gremio: el Coso no era una patente robada. Uno menos.\nPero mientras firmabas el acta, la Iglesia del Vapor se lo llevó en procesión.\nAhora es el Santo Horno que Fríe Sin Pecado... y su explicación es PEOR.»\n— el Narrador · continuará en el Acto 2',
         {
           fontFamily: 'monospace',
           fontSize: '12px',

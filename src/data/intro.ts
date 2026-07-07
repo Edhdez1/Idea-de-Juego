@@ -8,7 +8,8 @@ export type HablanteId =
   | 'ingeniera'
   | 'clerigo'
   | 'historiadora'
-  | 'reparador';
+  | 'reparador'
+  | 'brayan';
 
 export interface LineaIntro {
   hablante: HablanteId;
@@ -29,6 +30,7 @@ export const HABLANTES: Record<HablanteId, { nombre: string; color: string; retr
   clerigo: { nombre: 'El Clérigo del Vapor Bendito', color: '#8ad0ff', retrato: 'retrato_clerigo' },
   historiadora: { nombre: 'La Historiadora Varada', color: '#b8e88a', retrato: 'retrato_historiadora' },
   reparador: { nombre: 'El Reparador No Autorizado', color: '#e88ad0', retrato: 'retrato_reparador' },
+  brayan: { nombre: 'El Primo Brayan', color: '#ffd27a', retrato: 'retrato_brayan' },
 };
 
 /**
@@ -100,6 +102,8 @@ export const PANELES_PARTE2: PanelIntro[] = [
       { hablante: 'clerigo', texto: 'La Freidora da, mare, y la Freidora quita el aceite. Y el diezmo... el diezmo lo recojo yo, ¿va?' },
       { hablante: 'historiadora', texto: 'Es un electrodoméstico de cocina. Calienta aire y lo hace circular. ¿Por qué aplauden? No... no aplaudan.' },
       { hablante: 'reparador', texto: 'Tranqui, papi. Yo la rooteo, le meto firmware pirata, y el reino entero paga suscripción. Plan Bendito.' },
+      { hablante: 'brayan', texto: '¡Bros! ¿Suben la pirámide? Tengo cartas, pociones y un dealcito en— ¿a dónde van? ¡MI TABERNA QUEDA DE CAMINO!' },
+      { hablante: 'narrador', texto: 'Y ese es Brayan. Es de aquí — su madre lo confirma a gritos. Le comprarás cosas igualmente. Todos lo hacen.' },
       { hablante: 'narrador', texto: 'Sus razones son igual de malas. De momento cada quien va por su cuenta... pero la pirámide es estrecha, y arriba solo cabe una verdad.' },
     ],
   },

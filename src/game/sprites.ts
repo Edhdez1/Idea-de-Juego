@@ -51,7 +51,18 @@ export const INTRO_FILES: { key: string; file: string }[] = [
 /** Fondos de combate por encuentro (320×180, se muestran a escala 2). */
 export const BG_FILES: { key: string; file: string }[] = [
   { key: 'bg_taller_gremio', file: 'assets/bg/taller_gremio.png' },
+  { key: 'bg_taberna', file: 'assets/bg/taberna.png' },
+  { key: 'bg_mapa_distrito', file: 'assets/bg/mapa_distrito.png' },
 ];
+
+/** Iconos pixel de los nodos del mapa. */
+export const UI_FILES: { key: string; file: string }[] = [
+  'combate',
+  'elite',
+  'taberna',
+  'descanso',
+  'jefe',
+].map((t) => ({ key: `icono_${t}`, file: `assets/ui/icono_${t}.png` }));
 
 /** Arte propio de cada carta (key = card_<defId>). */
 export const CARD_ART_FILES: { key: string; file: string }[] = [
