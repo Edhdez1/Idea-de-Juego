@@ -260,6 +260,8 @@ export interface BattleState {
   defeat: DefeatCondition[];
   triggers: BattleTrigger[];
   firedTriggers: number[];
+  /** Índices de objetivos ya cumplidos (se quedan cumplidos: ObjectiveMet se emite una vez). */
+  metObjectives?: number[];
   /** Interactuables usados. */
   interacted: string[];
   campaignFlags: string[];

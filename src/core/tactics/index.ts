@@ -10,6 +10,8 @@
 export * from './types';
 export { makeTacticsRegistry } from './registry';
 export { createBattle, dispatch } from './battle';
+/** Piloto automático: juega el turno del jugador en curso con la IA (tests, botón «Auto»). */
+export { autoPlayTurn } from './autoplay';
 export {
   reachable,
   validTargets,
