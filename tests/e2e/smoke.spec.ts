@@ -1,69 +1,71 @@
 import { expect, test } from '@playwright/test';
-import type { CombatState, Intent } from '../../src/core/types';
-
-declare global {
-  interface Window {
-    __game?: {
-      ready: boolean;
-      getState(): CombatState;
-      dispatch(intent: Intent): void;
-    };
-  }
-}
+import type { Pos } from '../../src/core/tactics';
+import { vigilarErrores } from './util';
 
 /**
- * Smoke E2E: el juego carga, se juega una carta real, el turno enemigo
- * resuelve, y no hay NINGÚN error de consola ni excepción de página.
+ * Smoke E2E de la batalla táctica: el juego carga directo en prueba_smoke,
+ * la Ingeniera se mueve junto al Aprendiz, le pega con su ataque básico,
+ * espera, y el Reloj de Vapor devuelve el turno al jugador (o la batalla
+ * termina). Ningún error de consola ni excepción de página.
  */
-test('jugar una carta y terminar el turno sin errores', async ({ page }) => {
-  const errores: string[] = [];
-  // Los assets opcionales (audio, sprites aún no generados) pueden faltar:
-  // ni el 404 del navegador ni el fallo de decodificación de un audio
-  // ausente son errores del juego — hay fallback silencioso para ambos.
-  const esRuidoDeAsset = (texto: string): boolean =>
-    texto.includes('Failed to load resource') ||
-    texto.includes('Error decoding audio') ||
-    texto.includes('Failed to process file') ||
-    texto.includes('Unable to decode audio data');
-  page.on('console', (msg) => {
-    if (msg.type() === 'error' && !esRuidoDeAsset(msg.text())) errores.push(msg.text());
-  });
-  page.on('pageerror', (err) => {
-    if (!esRuidoDeAsset(String(err))) errores.push(String(err));
-  });
+test('mover, atacar y esperar sin errores', async ({ page }) => {
+  const errores = vigilarErrores(page);
 
-  await page.goto('/?test=1');
-  await page.waitForFunction(() => window.__game?.ready === true);
+  await page.goto('/?test=1&batalla=prueba_smoke');
+  await page.waitForFunction(() => window.__game?.ready === true && window.__game.modo === 'batalla');
 
-  // El robo es determinista pero no garantiza un ataque en el índice 0:
-  // buscamos la primera carta de ataque en mano.
-  const idx = await page.evaluate(() => {
-    const ataques = ['golpe_de_llave', 'motor_a_presion', 'pistola_de_remaches'];
-    return window.__game!.getState().hand.findIndex((c) => ataques.includes(c.defId));
-  });
-  expect(idx).toBeGreaterThanOrEqual(0);
-
-  const hpAntes = await page.evaluate(() => window.__game!.getState().enemies[0]!.hp);
-  await page.evaluate(
-    (i) => window.__game!.dispatch({ type: 'PLAY_CARD', handIndex: i, targetSlot: 0 }),
-    idx,
-  );
-  await page.waitForFunction(
-    (hp) => window.__game!.getState().enemies[0]!.hp < hp,
-    hpAntes,
-  );
-
-  await page.evaluate(() => window.__game!.dispatch({ type: 'END_TURN' }));
-  await page.waitForFunction(() => window.__game!.getState().turn === 2);
-
-  // La mano del turno 2 debe estar servida (5 cartas) y ser fase del jugador
-  const estado = await page.evaluate(() => {
+  const inicio = await page.evaluate(() => {
     const s = window.__game!.getState();
-    return { mano: s.hand.length, fase: s.phase, energia: s.energy };
+    const yo = s.units.find((u) => u.id === s.turn?.unitId)!;
+    const enemigo = s.units.find((u) => u.team === 'enemy' && !u.ko)!;
+    return { yo: yo.id, enemigo: enemigo.id, enemigoPos: enemigo.pos, hp: enemigo.hp };
   });
-  expect(estado.mano).toBe(5);
-  expect(estado.fase).toBe('player');
-  expect(estado.energia).toBe(3);
+  expect(inicio.yo).toBe('ingeniera');
 
+  // MOVE: a una casilla alcanzable pegada al enemigo
+  const destino = await page.evaluate(
+    ({ yo, e }) =>
+      window.__game!.query
+        .reachable(yo)
+        .map((t) => t.pos)
+        .find((p) => Math.abs(p.x - e.x) + Math.abs(p.y - e.y) === 1) ?? null,
+    { yo: inicio.yo, e: inicio.enemigoPos },
+  );
+  expect(destino).not.toBeNull();
+  await page.evaluate((to: Pos) => window.__game!.dispatch({ type: 'MOVE', to }), destino!);
+  await page.waitForFunction(
+    (to: Pos) => {
+      const s = window.__game!.getState();
+      const u = s.units.find((x) => x.id === 'ingeniera')!;
+      return u.pos.x === to.x && u.pos.y === to.y;
+    },
+    destino!,
+  );
+
+  // ACT: ataque básico sobre el enemigo
+  const objetivo = await page.evaluate(
+    ({ yo, e }) => window.__game!.query.validTargets(yo, 'golpe_de_llave').find((p) => p.x === e.x && p.y === e.y) ?? null,
+    { yo: inicio.yo, e: inicio.enemigoPos },
+  );
+  expect(objetivo).not.toBeNull();
+  await page.evaluate((target: Pos) => window.__game!.dispatch({ type: 'ACT', skillId: 'golpe_de_llave', target }), objetivo!);
+  await page.waitForFunction(
+    ({ id, hp }) => {
+      const e = window.__game!.getState().units.find((u) => u.id === id)!;
+      return e.hp < hp || e.ko;
+    },
+    { id: inicio.enemigo, hp: inicio.hp },
+  );
+
+  // WAIT: el turno vuelve al jugador (o la batalla termina)
+  await page.evaluate(() => window.__game!.dispatch({ type: 'WAIT', facing: 'SE' }));
+  await page.waitForFunction(() => {
+    const s = window.__game!.getState();
+    return (s.phase === 'awaitingPlayer' && s.turn?.unitId === 'ingeniera' && !s.turn.moved && !s.turn.acted) || s.phase !== 'awaitingPlayer';
+  });
+  // La escena terminó de animar y vuelve a aceptar órdenes
+  await page.waitForFunction(() => window.__game!.ready === true);
+
+  expect(await page.evaluate(() => window.__game!.avisos)).toEqual([]);
   expect(errores).toEqual([]);
 });
