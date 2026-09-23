@@ -35,3 +35,17 @@ Era cierto hace dos años; hoy el pipeline es: concepts con Higgsfield (direcci�
 
 - **Combate y mapa**: pixel art (sprites PixelLab 128×128, UI pixel).
 - **Transiciones, diálogos, selección de personaje, eventos narrativos**: ilustraciones (los concepts estilo caricatura satírica), siempre dentro de marcos pixel y con la misma paleta.
+
+## Pivote a RPG táctico (sept. 2026)
+
+El juego pasa de deckbuilder roguelite a **RPG táctico político** (ver `docs/GDD.md` v2). Lo que se decidió en lo técnico:
+
+- **El motor sigue siendo Phaser 4 + TypeScript + Vite.** El motivo es el mismo que protegía la alfa: las reglas viven en `src/core/`, sin una línea de Phaser (lo verifica un test de arquitectura), con RNG sembrado, tests y CI. El motor táctico nuevo (`src/core/tactics/`) y el de historia (`src/core/story/`) siguen esa regla, así que un cambio de motor futuro (Godot, Unity) seguiría costando solo la capa de dibujo. Cambiar ahora retrasaría el slice meses sin resolver ningún problema real: el cuello de botella es el diseño y el arte, no el render.
+- **Renderizador isométrico propio** en `src/ui/iso/`: la capa isométrica de Tiled no maneja alturas. Proyección `sx = (x − y)·32`, `sy = (x + y)·16 − h·16`; profundidad `(x + y)·64 + h·2 + capa`; selección sobre el rombo elevado; **cámara fija sin rotación** (reduce el arte a la mitad, como en Fell Seal). La proyección es un módulo sin Phaser con tests de Vitest.
+- **Tiled para la exploración cenital** (losetas de 32×32, colisiones con Arcade). Phaser no reproduce solo las animaciones de losetas de Tiled: las lee `src/ui/vivo/LosetasAnimadas` desde el JSON.
+- **Tauri sigue planeado** para la app de escritorio. La web se mantiene como canal de playtesting.
+- **Resolución interna 640×360**, escalado entero, `pixelArt: true`. Losetas isométricas de 64×32 con escalones de 16 px; personajes de 64×64 en 8 direcciones (jefes 96×96). Los sprites de 128×128 de la alfa pasan a ser referencia canónica y panel de unidad.
+- **Pipeline de arte con la API REST v2 de PixelLab** (`scripts/pixellab/`): `create-character-with-8-directions`, `characters/animations`, `create-isometric-tile`, `create-tileset`, `animate-with-text-v3`, con sondeo en `background-jobs`. Prompts, semillas y parámetros en `assets-src/pixellab/manifest.json`; solo lo aprobado se exporta a `public/assets/`. **El token va en la variable de entorno `PIXELLAB_API_TOKEN`**, nunca en el repositorio (`.env` en `.gitignore`). Puertas de aprobación en `docs/diseno/arte-slice.md`.
+- **Previews de Vercel por rama:** cada push a la rama de trabajo genera un link que los testers abren sin instalar nada.
+- **`main` queda congelada con la alfa de cartas** (etiqueta `alfa-cartas-v0.1`). El link público sigue siendo la alfa hasta que el Capítulo 1 cumpla sus criterios de salida (`docs/ROADMAP.md`, M7); entonces se hace merge.
+- **Se borra el código de cartas** después de la etiqueta. Se reutilizan `rng.ts`, los estados, la pipeline de daño, las constantes de Presión y mecha, y Overclock renombrado como «Sobremarcha».
