@@ -1,0 +1,30 @@
+{
+  "id": "ingeniera_sur_a",
+  "endpoint": "/rotate",
+  "params": {
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "from_view": "side",
+    "to_view": "low top-down",
+    "from_direction": "east",
+    "to_direction": "south",
+    "image_guidance_scale": 3.0,
+    "seed": 1101
+  },
+  "references": {
+    "from_image": "assets-src/pixellab/refs/ingeniera_este_64.png"
+  },
+  "seconds": 20.3,
+  "submit_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_usage": null,
+  "job_id": null,
+  "resource": null,
+  "files": [
+    "image.png"
+  ]
+}

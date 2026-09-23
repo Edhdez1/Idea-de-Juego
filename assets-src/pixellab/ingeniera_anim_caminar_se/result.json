@@ -1,0 +1,36 @@
+{
+  "id": "ingeniera_anim_caminar_se",
+  "endpoint": "/characters/animations",
+  "params": {
+    "character_id": "a68c6be8-9db4-41d7-a952-7fb8658bf721",
+    "mode": "v3",
+    "animation_name": "caminar",
+    "action_description": "walking forward confidently, arms swinging, backpack bouncing slightly; seamless walk cycle",
+    "frame_count": 6,
+    "directions": [
+      "south-east"
+    ],
+    "seed": 5102
+  },
+  "references": {},
+  "seconds": 271.7,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "ea86d263-0f0f-40d4-8b16-a1546b8718bd",
+  "resource": {
+    "kind": "character",
+    "id": "a68c6be8-9db4-41d7-a952-7fb8658bf721"
+  },
+  "files": [
+    "images_000.png",
+    "images_001.png",
+    "images_002.png",
+    "images_003.png",
+    "images_004.png",
+    "images_005.png",
+    "images_006.png"
+  ]
+}

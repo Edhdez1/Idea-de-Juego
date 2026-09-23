@@ -1,0 +1,36 @@
+{
+  "id": "ingeniera_char_v3",
+  "endpoint": "/create-character-v3",
+  "params": {
+    "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt with brass buckle, olive-green work trousers, brown leather boots with orange cuffs, big brown leather backpack with a red gauge light and two large dark-grey wrenches sticking out of it",
+    "name": "Ingeniera (piloto G1)",
+    "view": "low top-down",
+    "template_id": "mannequin",
+    "no_background": true,
+    "seed": 4101
+  },
+  "references": {
+    "reference_image": "assets-src/pixellab/ingeniera_sur_b/image.png"
+  },
+  "seconds": 203.1,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "54f100fc-5187-4707-bbae-a00289695b56",
+  "resource": {
+    "kind": "character",
+    "id": "a68c6be8-9db4-41d7-a952-7fb8658bf721"
+  },
+  "files": [
+    "storage_urls_east.png",
+    "storage_urls_west.png",
+    "storage_urls_north.png",
+    "storage_urls_south.png",
+    "storage_urls_north-east.png",
+    "storage_urls_north-west.png",
+    "storage_urls_south-east.png",
+    "storage_urls_south-west.png"
+  ]
+}

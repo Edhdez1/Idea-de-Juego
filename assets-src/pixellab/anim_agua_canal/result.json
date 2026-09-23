@@ -1,0 +1,29 @@
+{
+  "id": "anim_agua_canal",
+  "endpoint": "/animate-with-text-v3",
+  "params": {
+    "action": "the canal water surface gently ripples and flows, small light reflections shimmer and drift; the stone and brass rim stays perfectly still; seamless loop",
+    "frame_count": 6,
+    "seed": 3201
+  },
+  "references": {
+    "first_frame": "assets-src/pixellab/loseta_agua_canal/image.png"
+  },
+  "seconds": 128.8,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "b79ad324-10e1-4126-9be2-3a4df8126180",
+  "resource": null,
+  "files": [
+    "images_000.png",
+    "images_001.png",
+    "images_002.png",
+    "images_003.png",
+    "images_004.png",
+    "images_005.png",
+    "images_006.png"
+  ]
+}

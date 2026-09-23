@@ -1,0 +1,219 @@
+{
+  "_nota": "Manifiesto del pipeline PixelLab. Ejecutar con scripts/pixellab/pixellab.py run <id>. El token va en PIXELLAB_API_TOKEN, nunca aquí.",
+  "entries": [
+    {
+      "id": "ingeniera_sur_a",
+      "endpoint": "/rotate",
+      "params": {
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "from_view": "side",
+        "to_view": "low top-down",
+        "from_direction": "east",
+        "to_direction": "south",
+        "image_guidance_scale": 3.0,
+        "seed": 1101
+      },
+      "references": {
+        "from_image": "assets-src/pixellab/refs/ingeniera_este_64.png"
+      }
+    },
+    {
+      "id": "ingeniera_sur_b",
+      "endpoint": "/rotate",
+      "params": {
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "from_view": "side",
+        "to_view": "low top-down",
+        "from_direction": "south-east",
+        "to_direction": "south",
+        "image_guidance_scale": 6.0,
+        "seed": 1102
+      },
+      "references": {
+        "from_image": "assets-src/pixellab/refs/ingeniera_este_64.png"
+      }
+    },
+    {
+      "id": "ingeniera_rot8_v3",
+      "endpoint": "/generate-8-rotations-v3",
+      "params": {
+        "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt with brass buckle, olive-green work trousers, brown leather boots with orange cuffs, big brown leather backpack with a red gauge light and two large dark-grey wrenches sticking out of it",
+        "no_background": true,
+        "seed": 1103
+      },
+      "references": {
+        "first_frame": "assets-src/pixellab/refs/ingeniera_este_64.png"
+      }
+    },
+    {
+      "id": "loseta_agua_canal",
+      "endpoint": "/create-isometric-tile",
+      "params": {
+        "description": "steampunk city canal water, murky teal-green water with small ripples and an oily sheen, riveted brass and dark stone edge along the rim",
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "isometric_tile_size": 32,
+        "isometric_tile_shape": "thin tile",
+        "outline": "lineless",
+        "shading": "medium shading",
+        "detail": "medium detail",
+        "seed": 2201
+      }
+    },
+    {
+      "id": "loseta_respiradero",
+      "endpoint": "/create-isometric-tile",
+      "params": {
+        "description": "steampunk cobblestone floor tile with a round rusty iron sewer steam vent grate in the center, brass rivets, dark gaps between bars, faint white steam",
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "isometric_tile_size": 32,
+        "isometric_tile_shape": "thin tile",
+        "outline": "lineless",
+        "shading": "medium shading",
+        "detail": "medium detail",
+        "seed": 2202
+      }
+    },
+    {
+      "id": "prop_engranaje",
+      "endpoint": "/create-image-pixflux",
+      "params": {
+        "description": "single large brass cogwheel gear with eight teeth, riveted, slightly worn, steampunk, front view, centered",
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "no_background": true,
+        "outline": "single color black outline",
+        "shading": "medium shading",
+        "detail": "medium detail",
+        "view": "side",
+        "seed": 2203
+      }
+    },
+    {
+      "id": "anim_agua_canal",
+      "endpoint": "/animate-with-text-v3",
+      "params": {
+        "action": "the canal water surface gently ripples and flows, small light reflections shimmer and drift; the stone and brass rim stays perfectly still; seamless loop",
+        "frame_count": 6,
+        "seed": 3201
+      },
+      "references": {
+        "first_frame": "assets-src/pixellab/loseta_agua_canal/image.png"
+      }
+    },
+    {
+      "id": "anim_respiradero",
+      "endpoint": "/animate-with-text-v3",
+      "params": {
+        "action": "puffs of white steam rise from the iron vent grate and dissipate upward; the cobblestone tile and grate stay perfectly still; seamless loop",
+        "frame_count": 6,
+        "seed": 3202
+      },
+      "references": {
+        "first_frame": "assets-src/pixellab/loseta_respiradero/image.png"
+      }
+    },
+    {
+      "id": "anim_engranaje",
+      "endpoint": "/animate-with-text-v3",
+      "params": {
+        "action": "the brass gear spins clockwise in place around its center axle, steady mechanical rotation, seamless loop",
+        "frame_count": 6,
+        "no_background": true,
+        "seed": 3203
+      },
+      "references": {
+        "first_frame": "assets-src/pixellab/prop_engranaje/image.png"
+      }
+    },
+    {
+      "id": "anim_respiradero_v2",
+      "endpoint": "/animate-with-text-v3",
+      "params": {
+        "action": "small puffs of pale grey-blue steam rise from the iron vent grate and dissipate upward; the cobblestone tile and grate stay perfectly still; seamless loop",
+        "frame_count": 6,
+        "no_background": true,
+        "seed": 3212
+      },
+      "references": {
+        "first_frame": "assets-src/pixellab/loseta_respiradero/image.png"
+      }
+    },
+    {
+      "id": "ingeniera_char_v3",
+      "endpoint": "/create-character-v3",
+      "params": {
+        "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt with brass buckle, olive-green work trousers, brown leather boots with orange cuffs, big brown leather backpack with a red gauge light and two large dark-grey wrenches sticking out of it",
+        "name": "Ingeniera (piloto G1)",
+        "view": "low top-down",
+        "template_id": "mannequin",
+        "no_background": true,
+        "seed": 4101
+      },
+      "references": {
+        "reference_image": "assets-src/pixellab/ingeniera_sur_b/image.png"
+      }
+    },
+    {
+      "id": "ingeniera_8dir_std",
+      "endpoint": "/create-character-with-8-directions",
+      "params": {
+        "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt, olive-green work trousers, brown leather boots, big brown leather backpack with two large dark-grey wrenches",
+        "image_size": {
+          "width": 64,
+          "height": 64
+        },
+        "mode": "standard",
+        "view": "low top-down",
+        "seed": 4102
+      },
+      "references": {
+        "directions.south": "assets-src/pixellab/ingeniera_sur_b/image.png",
+        "directions.south-east": "assets-src/pixellab/refs/ingeniera_este_64.png"
+      }
+    },
+    {
+      "id": "ingeniera_anim_reposo_s",
+      "endpoint": "/characters/animations",
+      "params": {
+        "character_id": "a68c6be8-9db4-41d7-a952-7fb8658bf721",
+        "mode": "v3",
+        "animation_name": "reposo",
+        "action_description": "idle breathing, standing in place, chest rises gently, slight head bob, wrenches in backpack sway a little; seamless loop",
+        "frame_count": 4,
+        "directions": [
+          "south"
+        ],
+        "seed": 5101
+      }
+    },
+    {
+      "id": "ingeniera_anim_caminar_se",
+      "endpoint": "/characters/animations",
+      "params": {
+        "character_id": "a68c6be8-9db4-41d7-a952-7fb8658bf721",
+        "mode": "v3",
+        "animation_name": "caminar",
+        "action_description": "walking forward confidently, arms swinging, backpack bouncing slightly; seamless walk cycle",
+        "frame_count": 6,
+        "directions": [
+          "south-east"
+        ],
+        "seed": 5102
+      }
+    }
+  ]
+}

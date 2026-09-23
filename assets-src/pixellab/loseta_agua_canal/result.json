@@ -1,0 +1,33 @@
+{
+  "id": "loseta_agua_canal",
+  "endpoint": "/create-isometric-tile",
+  "params": {
+    "description": "steampunk city canal water, murky teal-green water with small ripples and an oily sheen, riveted brass and dark stone edge along the rim",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "isometric_tile_size": 32,
+    "isometric_tile_shape": "thin tile",
+    "outline": "lineless",
+    "shading": "medium shading",
+    "detail": "medium detail",
+    "seed": 2201
+  },
+  "references": {},
+  "seconds": 63.5,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "66e71a29-38a3-46d2-bbea-6f4234c43b8c",
+  "resource": {
+    "kind": "isometric-tile",
+    "id": "b08cdf81-f89c-44b1-a6f1-b131d7ee8579"
+  },
+  "files": [
+    "image.png",
+    "quantized_image.png"
+  ]
+}

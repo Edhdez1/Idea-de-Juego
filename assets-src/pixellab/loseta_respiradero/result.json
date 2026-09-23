@@ -1,0 +1,33 @@
+{
+  "id": "loseta_respiradero",
+  "endpoint": "/create-isometric-tile",
+  "params": {
+    "description": "steampunk cobblestone floor tile with a round rusty iron sewer steam vent grate in the center, brass rivets, dark gaps between bars, faint white steam",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "isometric_tile_size": 32,
+    "isometric_tile_shape": "thin tile",
+    "outline": "lineless",
+    "shading": "medium shading",
+    "detail": "medium detail",
+    "seed": 2202
+  },
+  "references": {},
+  "seconds": 45.7,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "db25619e-3136-42a6-a713-2761367e672b",
+  "resource": {
+    "kind": "isometric-tile",
+    "id": "74e6381c-46b6-4b30-80ad-f2f7b9f6ad5b"
+  },
+  "files": [
+    "image.png",
+    "quantized_image.png"
+  ]
+}
