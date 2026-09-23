@@ -1,3 +1,5 @@
+> Obsoleto: GDD v1 del deckbuilder (alfa de cartas, etiqueta alfa-cartas-v0.1). Sustituido por docs/GDD.md (v2, RPG táctico político). Se conserva como referencia; la tabla «Qué sustituye la v2» del GDD nuevo indica qué partes siguen vigentes.
+
 # GDD — «El Coso del Rey»
 
 > Deck builder roguelite steampunk-medieval y sinsentido total. Una freidora de aire cae del cielo en un reino que no está preparado para ella, y toda la pirámide social pierde la cabeza intentando explicar qué es. Tú subes esa pirámide a golpe de cartas… y tus propias cartas pueden explotarte en la mano.

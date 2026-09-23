@@ -1,3 +1,5 @@
+> Obsoleto: alfa de cartas (etiqueta alfa-cartas-v0.1). Se conserva como referencia; los eventos y reliquias se reciclan (ver docs/diseno/capitulo-1.md).
+
 # Cartas — Lote 2 de la Ingeniera Desahuciada
 
 > Documento de diseño de contenido. **18 cartas nuevas** (10C / 6U / 2R) para llevar el pool obtenible de la Ingeniera de 5 a 23 (~25 con margen), **8 reliquias** especificadas para la fase de reliquias, **5 eventos "?"** y la **tabla de balance** que justifica los números.

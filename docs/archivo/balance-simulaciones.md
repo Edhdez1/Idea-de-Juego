@@ -1,3 +1,5 @@
+> Obsoleto: alfa de cartas (etiqueta alfa-cartas-v0.1). Se conserva como referencia; los eventos y reliquias se reciclan (ver docs/diseno/capitulo-1.md).
+
 # Simulaciones de balance — Acto 1 (v1)
 
 > Analista de balance · 2026-07-07 · motor en `src/core/` (commit de trabajo sobre `7c3edcc`).
