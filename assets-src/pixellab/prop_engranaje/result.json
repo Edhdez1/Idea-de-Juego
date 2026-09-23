@@ -1,0 +1,29 @@
+{
+  "id": "prop_engranaje",
+  "endpoint": "/create-image-pixflux",
+  "params": {
+    "description": "single large brass cogwheel gear with eight teeth, riveted, slightly worn, steampunk, front view, centered",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "no_background": true,
+    "outline": "single color black outline",
+    "shading": "medium shading",
+    "detail": "medium detail",
+    "view": "side",
+    "seed": 2203
+  },
+  "references": {},
+  "seconds": 30.5,
+  "submit_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_usage": null,
+  "job_id": null,
+  "resource": null,
+  "files": [
+    "image.png"
+  ]
+}

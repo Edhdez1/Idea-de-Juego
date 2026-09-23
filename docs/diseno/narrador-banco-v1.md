@@ -158,3 +158,69 @@ El jefe defiende SU explicación del Coso — «una patente robada de uno de nue
 - Distribución de niveles: **47 × nivel 1 · 19 × nivel 2 · 4 × nivel 3** — respeta el presupuesto (nivel 1 común, nivel 2 ocasional, nivel 3 rara y solo en momentos clave: primera Sobrecarga, mapa/jefes, derrotas repetidas, final de acto).
 - Cada fila mapea 1:1 a una entrada de `src/data/narrator.ts` con `{ trigger, level, text, cooldown, weight, seenFlag }`. Los disparadores usan los eventos del GDD §6 (`onOverload`, `onPlayerDeath{count}`, `onCardExploded`, `onHoardGold`…).
 - Pendiente para v2: variantes por época/creencia del personaje (§4.4), líneas para Autómata y Junta del Gremio, reacciones a mercenarios concretos, y banco de la Recaudadora como élite.
+
+---
+
+## Remapeo al RPG táctico (pivote de sept. 2026)
+
+> El banco de arriba se escribió para la alfa de cartas. Esta sección dice qué disparador táctico sustituye a cada uno y qué líneas quedan obsoletas. Reglas v2 (GDD §8): **≤ 15–20 líneas del Narrador por capítulo**, **≤ 1 ruptura de nivel 3 por capítulo**, ≤ 1 intervención por batalla (+1 en derrota o reintento). Los eventos son los de `TacticalEvent` (`src/core/tactics/types.ts`); los de historia salen del ejecutor de guiones (`src/core/story/`).
+
+### Equivalencias de cooldown
+
+| v1 | v2 |
+|---|---|
+| `combate` | `batalla` (no repetir en la misma batalla) |
+| `run` | `capítulo` (una vez por capítulo) |
+| `meta` | `campaña` (persistente en `coso:meta`, sobrevive a reintentos y partidas nuevas) |
+| `banco` | Igual: rotación con peso hasta agotar el grupo |
+
+### Tabla de remapeo
+
+| Disparador v1 | Disparador v2 | Condición | Notas |
+|---|---|---|---|
+| `combate:inicio` | **primer `TurnStarted`** de la batalla | `BattleState.activations` bajo y es el primer turno del jugador | Como mucho en 1 de cada 3 batallas |
+| `combate:inicio:<enemigo>` | primer `TurnStarted` | La `BattleDef` incluye ese `defId`. **`recaudador` → Cobrador de Cuotas del Gremio** | Reescribir «El Recaudador» como «el Cobrador de Cuotas» en sus dos líneas |
+| `sobrecarga:primera` | **`Overload`** | Primera de la campaña (`campaña`) | La de nivel 3 («al botón le diste tú») compite por la ranura de nivel 3 del capítulo |
+| `sobrecarga:muerte` | **`BattleEnded{defeat}`** | El último `Damaged` antes de la derrota tuvo `source: 'overload'` | «La carta decía "+3 de Presión"» → **obsoleta**; ver reescrituras |
+| `prototipo:explota` | **`PrototypeExploded`** | — | Las líneas hablan de «tercer uso»: reescribir a **mecha** |
+| *(nuevo)* fuego amigo | `Damaged` sobre una unidad del jugador con `source: 'explosion'` u `'overload'` causado por el jugador | Primera vez por capítulo | Usa las líneas de `derrota:auto` nivel 1 como base |
+| `victoria:sin_daño` | **`BattleEnded{victory}`** | Ningún `Damaged` sobre unidades del jugador en toda la batalla | — |
+| `victoria:agonica` | **`BattleEnded{victory}`** | Alguna unidad del jugador por debajo del 20 % de vida o KO | — |
+| `derrota:enemigo` | **`BattleEnded{defeat}`** + `battles[id].attempts` | `attempts` = 1 | Se muestra en la pantalla de reintento |
+| `derrota:auto` | **`BattleEnded{defeat}`** | La última unidad cayó por `explosion` u `overload` propios | — |
+| `jefe:muerte_repetida` | **`BattleEnded{defeat}`** en batalla de jefe | `attempts` ≥ 2 (nivel 2) / ≥ 3 (nivel 3) | El nivel 3 consume la ranura del capítulo. En el cap. 1 compite con la línea de reintento del Gran Maestre (`capitulo-1.md` §10): solo sale una |
+| `gran_maestre:muerto` | **`BattleEnded{victory}`** en B3 | — | El Gran Maestre ya no muere: se rinde y apela. «Cae el Gran Maestre» sirve; ajustar «muerto» en el id a `gran_maestre:derrotado` |
+| `jefe:gm:entrada` | `Dialogue` al inicio de B3 | Rotación | Se complementa con las líneas por variante de `capitulo-1.md` §10 |
+| `jefe:gm:fase` | Disparador de batalla por umbral de vida (50 %) | — | Coincide con la fase 2 (sube a la Desmontadora) |
+| `taberna:entrar`, `taberna:brayan` | Evento de historia **entrar en `taberna_brayan`** | Primera visita del capítulo | Siguen valiendo |
+| `oro:avaricia_150` | Evento de historia **abrir la tienda** | Oro ≥ 150 | Siguen valiendo |
+| `mapa:primera_vez` | Evento de historia **primera entrada en un mapa de exploración** | Primera vez por mapa | Reescribir: ya no hay «rutas» ni mapa de nodos |
+| *(nuevo)* primera Gotera | **`GoteraWarned`** | Primera de la campaña | Línea nueva, ver abajo |
+| *(nuevo)* pitidos del Coso | **`CosoBeeped`** | En B2, al 2.º pitido | Línea nueva, ver abajo |
+
+### Líneas obsoletas (no se portan)
+
+- **§8 Descanso (hoguera), las 3 líneas:** no hay hogueras. «Descansa. El Gremio no descansa…» puede reciclarse como línea de salida de la taberna.
+- **§9 `recompensa:elegir` y `recompensa:saltar`, las 5 líneas:** no hay recompensas de 1 entre 3.
+- **§3 `sobrecarga:muerte`:** «Para que conste: la carta decía "+3 de Presión"…» (habla de cartas).
+- **§10 `mapa:primera_vez`:** «Desde aquí se ven todas las rutas…» (mapa de nodos).
+- **§10 `jefe:muerte_repetida` nivel 3:** «…exactamente esto pero con el mismo mazo» (mazo).
+- **§12 `jefe:gm:fase:vida_baja`:** «¿En serio vas a jugar esa carta?» (carta). Sustituida por la línea de reintento del Gran Maestre en `capitulo-1.md` §10.
+- **§1** «Combate número… da igual el número» y **§5** «…cuando el mapa te ofrezca dos élites y un signo de interrogación» (estructura de run).
+
+### Reescrituras para el táctico
+
+| Disparador v2 | Nivel | Línea |
+|---|---|---|
+| `PrototypeExploded` | 1 | «Mecha a cero, tal como marcaba la barra. La ingeniería del Gremio: puntualísima para explotar, impuntual para todo lo demás.» |
+| `PrototypeExploded` | 2 | «La mecha estaba en la barra de turnos. Grande. Con cuenta atrás. Lo menciono para el expediente.» |
+| `BattleEnded{defeat}` (overload) | 2 | «Para que conste: el manómetro marcaba nueve. Tú marcaste el diez.» |
+| `BattleEnded{defeat}` jefe, `attempts` ≥ 3 | 3 | «Otra vez este jefe. Sí, tú, el que sostiene el ratón: hay una definición famosa de locura, y es exactamente esto pero con la misma formación.» |
+| Primera entrada en un mapa | 1 | «El Distrito del Gremio. Arriba, la pirámide; abajo, el barro; en medio, un cráter con un electrodoméstico. Los sabios van por el segundo ocho.» |
+| `GoteraWarned` (primera) | 1 | «Una Gotera. Esa casilla está a punto de ser de otro siglo. Pita antes de cambiar, que es más de lo que hizo el Coso.» |
+| `CosoBeeped` (B2, 2.º pitido) | 1 | «Segundo pitido. En su idioma significa "cesta lista". En el vuestro, "corred".» |
+| `Overload` + un héroe KO por ella | 1 | «Fuego amigo. En este reino lo llaman así porque "fuego de un compañero que no mira el manómetro" no cabía en el formulario.» |
+
+### Presupuesto recomendado para el capítulo 1
+
+De las 60 líneas del Narrador del banco, el capítulo 1 usa como mucho **18** en una partida normal: 3 de inicio de batalla, 2 de Presión/Sobrecarga, 2 de Prototipo, 2 de victoria, 2 de derrota o reintento, 2 de taberna, 1 de tienda, 1 de primer mapa, 1 de Gotera, 1 de pitidos, 1 de cierre (epílogo). Los resúmenes al saltar escenas no cuentan.

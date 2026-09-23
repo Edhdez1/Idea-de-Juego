@@ -19,6 +19,8 @@ function chromiumLocal(): string | undefined {
 
 export default defineConfig({
   testDir: 'tests/e2e',
+  // Las capturas/vídeo (@capturas) no corren en CI: CAPTURAS=1 npx playwright test --grep @capturas
+  grepInvert: process.env.CAPTURAS ? undefined : /@capturas/,
   timeout: 60_000,
   use: {
     baseURL: 'http://localhost:4173',

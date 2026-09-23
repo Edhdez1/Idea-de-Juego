@@ -5,3 +5,7 @@ dist/
 .vercel
 test-results/
 playwright-report/
+
+# PixelLab: secretos y respuestas crudas
+.env
+assets-src/pixellab/**/raw-*.json

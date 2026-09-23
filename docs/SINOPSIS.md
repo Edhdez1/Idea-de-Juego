@@ -4,7 +4,7 @@
 
 El reino de **Vaporcracia** era, hasta hace poco, un lugar perfectamente normal: castillos con calderas, catedrales con chimeneas, campesinos medievales arando junto a autómatas de latón que nadie recuerda haber inventado, y una pirámide social tan sólida que tenía formulario propio para quejarse de ella (el Q-12, «Solicitud de Permiso para Estar Inconforme», tres sellos, seis meses de espera).
 
-Una mañana cualquiera, en la plaza del mercado, **apareció de la nada una freidora de aire**.
+Una mañana cualquiera, en la plaza del mercado, **cayó del cielo una freidora de aire**. Dejó un cráter en el empedrado. El Gremio cobró la gravilla.
 
 Nadie sabe qué es. Nadie sabrá **nunca** qué es.
 
@@ -23,7 +23,7 @@ Y como el Coso apareció sin dueño, sin factura y sin declarar, cada instituci�
 - **La Iglesia del Vapor** lo proclamó *el Santo Horno que Fríe Sin Pecado* (el aceite es pecado desde el martes pasado, hubo cónclave) y quiere canonizarlo.
 - **La Corona**, tras un análisis heráldico exhaustivo, determinó que el Coso es *el legítimo heredero al trono* — y quiere **coronarlo**.
 
-Tu misión es subir la pirámide social entera, del barro del Gremio al salón del trono, abriéndote paso a golpe de cartas, para llegar hasta el Coso. ¿Y luego qué? Eso depende de quién seas. Nadie en este reino quiere *la verdad*. Todos quieren *tener razón*.
+Tu misión es subir la pirámide social entera, del barro del Gremio al salón del trono, piso a piso y batalla a batalla, para llegar hasta el Coso. ¿Y luego qué? Eso depende de quién seas. Nadie en este reino quiere *la verdad*. Todos quieren *tener razón*.
 
 ## Las Goteras del Tiempo
 
@@ -33,7 +33,7 @@ Su aparición **agujereó el tiempo**, y desde entonces a Vaporcracia le caen an
 
 Nadie del reino lo encuentra raro. La burocracia ya tiene un formulario para ello: el **T-800, «Solicitud de Registro de Persona Temporalmente Desplazada»**. La cola da la vuelta a la catedral.
 
-Por eso, antes de empezar, el reino te hace a ti — al jugador — una única pregunta administrativa:
+Por eso, antes de empezar, el reino hace una única pregunta administrativa:
 
 > **«Marque su siglo de origen.»**
 
@@ -47,7 +47,7 @@ Trabajaba para el Gremio: setenta horas semanales, pago en «exposición» y una
 
 Del Coso le enfurece una sola cosa: **sabe que fríe, pero no sabe CÓMO fríe sin aceite.** «¿Será magia? No. ¿Entonces? …¿Será magia?» Le arde no poder abrirlo. El plástico protector se le aparece en sueños.
 
-Pelea con **Artilugios** que ella misma remacha en mitad del combate y con **Prototipos** que funcionan de maravilla exactamente tres veces antes de explotar. Su caldera de **Presión de Vapor** es su mejor arma y su causa de muerte más frecuente, en ese orden. Habla paisa: *«¡Avemaría pues, esta caldera sí sirve, home!»* — normalmente justo antes de la Sobrecarga.
+Pelea plantando en el tablero **Prototipos** con la mecha encendida: funcionan de maravilla hasta que la cuenta atrás llega a cero y explotan, a veces encima de quien no debía. Su caldera de **Presión de Vapor** es su mejor arma y su causa de muerte más frecuente, en ese orden. Habla paisa: *«¡Avemaría pues, esta caldera sí sirve, home!»* — normalmente justo antes de la Sobrecarga.
 
 ### ⛪ El Clérigo del Vapor Bendito — *medieval* (el devoto)
 
@@ -55,7 +55,7 @@ Fue el **primero** en arrodillarse ante el Coso. El primero en llamarlo dios. El
 
 Para él la teología es sencilla: **«la Freidora da, y la Freidora quita el aceite.»** Cada pitido es una profecía. Cada «88:88», un salmo. ¿Que si de verdad cree? Esa pregunta es de escéptico, y los escépticos no dejan limosna.
 
-Pelea acumulando **Feligreses** con sermones y luego pasando la **colecta**, obra **milagros-placebo** que prometen una cosa y hacen otra (a veces mejor), y le encasqueta *Reliquias Falsas* al mazo enemigo. Habla yucateco: *«No te asustes, mare, el vapor bendito lo cura todo… por una módica limosna, ¿va?»*
+Pelea acumulando **Feligreses** con sermones y luego pasando la **colecta**, obra **milagros-placebo** que prometen una cosa y hacen otra (a veces mejor), y le encasqueta *Reliquias Falsas* al enemigo. Habla yucateco: *«No te asustes, mare, el vapor bendito lo cura todo… por una módica limosna, ¿va?»*
 
 ### 🔭 La Historiadora Varada — *futurista* (la que sabe)
 
@@ -63,7 +63,7 @@ Vino del futuro a documentar «el Incidente de la Freidora» para su posdoctorad
 
 Nadie le cree. Cada vez que lo explica — «es un electrodoméstico de cocina, calienta aire y lo hace circular» — el reino entero aplaude y le dice *«qué imaginación»*. El Clérigo la bendice con condescendencia. El Gremio le pidió que lo dejara por escrito y usó el informe para calzar una mesa. Si documenta el Incidente con rigor académico, quizá la rescaten. O al menos le publiquen el paper.
 
-Pelea con **Spoilers**: información como recurso — lee los intents futuros de los enemigos, ordena el mazo, y suspira «ya leí este combate». Su equipo del futuro debería vaporizar continentes, pero pega números normales (ver: el Narrador). Habla en **español neutro de doblaje de documental**: *«Observemos cómo el espécimen local intenta abrir la freidora con una espada. Fascinante. Y triste.»*
+Pelea con **Spoilers**: información como recurso — ve lo que harán los enemigos antes que nadie, los retrasa en el orden de turnos, y suspira «ya leí esta batalla». Su equipo del futuro debería vaporizar continentes, pero pega números normales (ver: el Narrador). Habla en **español neutro de doblaje de documental**: *«Observemos cómo el espécimen local intenta abrir la freidora con una espada. Fascinante. Y triste.»*
 
 ### 💾 El Reparador No Autorizado — *cyberpunk* (el oportunista)
 
@@ -71,7 +71,7 @@ Cayó de un futuro de neón con un maletín de destornilladores ilegales y cero 
 
 Su plan: rootear la freidora, meterle firmware pirata, y venderle al reino la suscripción premium de algo que siempre fue gratis. Ya diseñó los tres planes (Bronce, Plata y Bendito). Ya hay lista de espera. No tiene el Coso todavía, pero eso es un detalle de implementación.
 
-Pelea con **Glitches**: cartas que se «actualizan» solas al jugarse — a veces mejoran, a veces ganan bugs — y **deuda técnica** que estalla en fecha conocida, como todo en su vida. Habla boricua: *«Tranqui, papi, esto lo rooteo en dos minutos. ¿Garantía? La garantía la perdiste al nacer en este siglo, bro.»*
+Pelea con **Glitches**: reprograma los artilugios del enemigo, empuja lo que no es suyo, instala «actualizaciones» que a veces mejoran y a veces traen bugs, y **deuda técnica** que estalla en fecha conocida, como todo en su vida. Habla boricua: *«Tranqui, papi, esto lo rooteo en dos minutos. ¿Garantía? La garantía la perdiste al nacer en este siglo, bro.»*
 
 ---
 
@@ -79,7 +79,7 @@ Los cuatro se cruzan, discuten y se sabotean, porque el reino no es lo bastante 
 
 ## Los que esperan en la Taberna
 
-A mitad de camino entre combate y combate está **la Taberna**, donde el fuego está encendido, la cerveza está aguada y los mercenarios están disponibles — cada uno con su acento, su contrato y sus cláusulas absurdas de rescisión («no trabaja martes», «cobra extra si hay autómatas», «se va si lo miras feo»).
+Entre batalla y batalla está **la Taberna**, donde el fuego está encendido, la cerveza está aguada y los mercenarios están disponibles — cada uno con su acento, su contrato y sus cláusulas absurdas de rescisión («no trabaja martes», «cobra extra si hay autómatas», «se va si lo miras feo»).
 
 Ahí paran el **Matón gallego** (devoto, contundente), la **Boticaria chilanga** (escéptica; sus remedios curan o envenenan, ella dice que eso es medicina), el **Bardo andaluz** que solo canta rumores falsos del Coso, el **Cartógrafo chileno** al que nadie del reino ha entendido jamás una palabra… y **el Primo Brayan**.
 
@@ -95,7 +95,7 @@ El Narrador es el único ser del universo que sabe qué es una freidora de aire,
 
 > «Tú sí sabes lo que es. No se lo digas. No me lo estropees.»
 
-También es él quien mantiene el equilibrio del juego, y no le da vergüenza admitirlo. Cuando la Historiadora desenfunda su *Láser Desintegrador de Antimateria* y este inflige 8 de daño, la carta lo explica con honestidad:
+También es él quien mantiene el equilibrio del juego, y no le da vergüenza admitirlo. Cuando la Historiadora desenfunda su *Láser Desintegrador de Antimateria* y este inflige 8 de daño, la descripción de la habilidad lo explica con honestidad:
 
 > *«Debería vaporizar el continente. Lo dejé en 8 por equilibrio narrativo. De nada.» — el Narrador*
 
@@ -113,4 +113,4 @@ Fríe sin aceite. Técnicamente, eso es un milagro.
 
 ---
 
-*El Coso del Rey — deck builder roguelite de caos justo, sátira social y sinsentido estructural. Cualquier parecido con la sociedad real es, lamentablemente, el objetivo.*
+*El Coso del Rey — RPG táctico político de caos justo, sátira social y sinsentido estructural. Cualquier parecido con la sociedad real es, lamentablemente, el objetivo.*

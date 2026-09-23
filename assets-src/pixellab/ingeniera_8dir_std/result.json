@@ -1,0 +1,47 @@
+{
+  "id": "ingeniera_8dir_std",
+  "endpoint": "/create-character-with-8-directions",
+  "params": {
+    "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt, olive-green work trousers, brown leather boots, big brown leather backpack with two large dark-grey wrenches",
+    "image_size": {
+      "width": 64,
+      "height": 64
+    },
+    "mode": "standard",
+    "view": "low top-down",
+    "seed": 4102
+  },
+  "references": {
+    "directions.south": "assets-src/pixellab/ingeniera_sur_b/image.png",
+    "directions.south-east": "assets-src/pixellab/refs/ingeniera_este_64.png"
+  },
+  "seconds": 124.0,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "be56b7cf-a4cd-4987-89d6-6f62923facba",
+  "resource": {
+    "kind": "character",
+    "id": "50d17595-e53f-4372-92ec-ac8daada19e0"
+  },
+  "files": [
+    "images_east.png",
+    "images_west.png",
+    "images_north.png",
+    "images_south.png",
+    "images_north-east.png",
+    "images_north-west.png",
+    "images_south-east.png",
+    "images_south-west.png",
+    "quantized_images_east.png",
+    "quantized_images_west.png",
+    "quantized_images_north.png",
+    "quantized_images_south.png",
+    "quantized_images_north-east.png",
+    "quantized_images_north-west.png",
+    "quantized_images_south-east.png",
+    "quantized_images_south-west.png"
+  ]
+}

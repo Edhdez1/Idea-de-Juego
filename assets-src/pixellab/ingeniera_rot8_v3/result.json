@@ -1,0 +1,30 @@
+{
+  "id": "ingeniera_rot8_v3",
+  "endpoint": "/generate-8-rotations-v3",
+  "params": {
+    "description": "young woman steampunk engineer: dark plum-black hair in a messy top bun, brass goggles with yellow lenses on her forehead, mustard-yellow short-sleeve shirt, brown leather belt with brass buckle, olive-green work trousers, brown leather boots with orange cuffs, big brown leather backpack with a red gauge light and two large dark-grey wrenches sticking out of it",
+    "no_background": true,
+    "seed": 1103
+  },
+  "references": {
+    "first_frame": "assets-src/pixellab/refs/ingeniera_este_64.png"
+  },
+  "seconds": 89.1,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "148db7d0-7a7c-4257-b543-851d0eda9478",
+  "resource": null,
+  "files": [
+    "images_000.png",
+    "images_001.png",
+    "images_002.png",
+    "images_003.png",
+    "images_004.png",
+    "images_005.png",
+    "images_006.png",
+    "images_007.png"
+  ]
+}

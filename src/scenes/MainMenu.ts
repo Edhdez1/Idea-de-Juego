@@ -1,22 +1,15 @@
 import Phaser from 'phaser';
 import { musica, sonar } from '../game/audio';
 import { GAME_HEIGHT, GAME_WIDTH } from '../game/constants';
-import {
-  borrarRun,
-  cargarRun,
-  crearRun,
-  establecerRun,
-  guardarRun,
-  nuevaSemilla,
-} from '../game/run';
-import { MODO_TEST } from '../game/test-hooks';
+import { BATALLA_TEST, MODO_TEST, SEMILLA_TEST } from '../game/test-hooks';
+import type { BatallaInit } from './Batalla';
 
-const COMBATE_INICIAL = { encounterId: 'taller_embargado', seed: 20260702 };
+/** Semilla fija del Prólogo: la campaña es escrita, no aleatoria. */
+const SEMILLA_PROLOGO = 20260923;
 
 /**
- * Menú principal. Si hay una run guardada ofrece CONTINUAR además de
- * NUEVA RUN (que borra el save y genera semilla desde un contador
- * persistido: nada de Date.now, regla del proyecto).
+ * Menú principal: NUEVA PARTIDA arranca el Prólogo (B0 «Taller Embargado»).
+ * En modo test (?test=1&batalla=<id>) va directo a esa batalla.
  */
 export class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -24,9 +17,8 @@ export class MainMenuScene extends Phaser.Scene {
   }
 
   create(): void {
-    // En modo test el smoke va directo al combate, sin depender de clicks en canvas.
     if (MODO_TEST) {
-      this.scene.start('Combat', COMBATE_INICIAL);
+      this.scene.start('Batalla', { battleId: BATALLA_TEST, seed: SEMILLA_TEST } satisfies BatallaInit);
       return;
     }
 
@@ -41,29 +33,19 @@ export class MainMenuScene extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 25, 'la caldera ya silba — alfa jugable', {
+      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 25, 'RPG táctico político · Prólogo jugable', {
         fontFamily: 'monospace',
         fontSize: '12px',
         color: '#a08662',
       })
       .setOrigin(0.5);
 
-    const guardada = cargarRun();
-    if (guardada) {
-      this.boton(GAME_HEIGHT / 2 + 25, '[ CONTINUAR ]', () => {
-        establecerRun(guardada);
-        this.scene.start('Map');
-      });
-      this.boton(GAME_HEIGHT / 2 + 55, '[ NUEVA RUN ]', () => {
-        borrarRun();
-        this.nuevaRun();
-      });
-    } else {
-      this.boton(GAME_HEIGHT / 2 + 40, '[ JUGAR ]', () => this.nuevaRun());
-    }
+    this.boton(GAME_HEIGHT / 2 + 30, '[ NUEVA PARTIDA ]', () =>
+      this.scene.start('Batalla', { battleId: 'prologo_taller', seed: SEMILLA_PROLOGO } satisfies BatallaInit),
+    );
 
     const verIntro = this.add
-      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 88, 'ver intro', {
+      .text(GAME_WIDTH / 2, GAME_HEIGHT / 2 + 70, 'ver intro', {
         fontFamily: 'monospace',
         fontSize: '11px',
         color: '#a08662',
@@ -76,14 +58,6 @@ export class MainMenuScene extends Phaser.Scene {
       sonar(this, 'sfx_click');
       this.scene.start('Intro');
     });
-  }
-
-  private nuevaRun(): void {
-    const run = crearRun(nuevaSemilla());
-    establecerRun(run);
-    guardarRun(run);
-    // El Map presenta el distrito con la bienvenida del Narrador.
-    this.scene.start('Map');
   }
 
   private boton(y: number, texto: string, alPulsar: () => void): void {

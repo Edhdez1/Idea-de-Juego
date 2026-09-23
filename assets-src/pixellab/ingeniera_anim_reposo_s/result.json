@@ -1,0 +1,34 @@
+{
+  "id": "ingeniera_anim_reposo_s",
+  "endpoint": "/characters/animations",
+  "params": {
+    "character_id": "a68c6be8-9db4-41d7-a952-7fb8658bf721",
+    "mode": "v3",
+    "animation_name": "reposo",
+    "action_description": "idle breathing, standing in place, chest rises gently, slight head bob, wrenches in backpack sway a little; seamless loop",
+    "frame_count": 4,
+    "directions": [
+      "south"
+    ],
+    "seed": 5101
+  },
+  "references": {},
+  "seconds": 207.3,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "82161e65-cf17-400b-8178-2f9cec052d00",
+  "resource": {
+    "kind": "character",
+    "id": "a68c6be8-9db4-41d7-a952-7fb8658bf721"
+  },
+  "files": [
+    "images_000.png",
+    "images_001.png",
+    "images_002.png",
+    "images_003.png",
+    "images_004.png"
+  ]
+}

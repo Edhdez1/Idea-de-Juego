@@ -1,52 +1,43 @@
-# Roadmap — El Coso del Rey
+# Roadmap — El Coso del Rey (RPG táctico político)
 
-Objetivo del primer hito: **vertical slice** — 1 personaje (la Ingeniera), 1 acto, divertido de punta a punta en 20-30 min.
+> **Pivote de septiembre de 2026.** La alfa de cartas (deckbuilder roguelite) queda congelada en `main` con la etiqueta `alfa-cartas-v0.1` y sigue siendo el link público hasta que el slice nuevo cumpla sus criterios. Todo el trabajo nuevo va en la rama de desarrollo con un **PR draft**; los testers juegan en el **preview de Vercel** de esa rama.
+>
+> Objetivo: **vertical slice «Capítulo 1: La Patente»** (prólogo + capítulo 1, 60–90 min), que se publicará gratis como capítulo 1 (modelo Deltarune). Horizonte: unos **3–4 meses** de calendario.
+>
+> Diseño: `docs/GDD.md` · canon: `docs/BIBLIA-NARRATIVA.md` · guion: `docs/diseno/capitulo-1.md` · reglas: `docs/diseno/reglas-tacticas.md` · arte: `docs/diseno/arte-slice.md`.
 
-> Vaporcracia pasa a ser el nombre del **reino**; el juego se llama **«El Coso del Rey»** y su premisa (la freidora de aire caída del cielo) está en el GDD §0.
+## Hitos
 
-## Fase 0 — Scaffolding ✅ (esta rama)
-- Investigación consolidada (`docs/investigacion/`), GDD y roadmap.
-- Proyecto Vite + TypeScript estricto + Phaser 4 + Vitest + ESLint (regla: prohibido importar `phaser` bajo `src/core/`).
-- Primer código del core: RNG splitmix32 con streams, tipos base, primeras cartas de la Ingeniera con tests en verde.
-- Escenas Boot/Preload/MainMenu placeholder que arrancan sin errores. CI (typecheck + tests + build).
+| Hito | Contenido | Criterio de salida |
+|---|---|---|
+| **M0 — Documentos y pruebas técnicas** | GDD v2, Biblia narrativa v2, reglas tácticas, guion del capítulo 1, arte del slice, este roadmap y decisiones técnicas. Etiqueta `alfa-cartas-v0.1` y rama de trabajo. Pruebas técnicas: Tilemap y Arcade en Phaser 4.1, vista Sur de la Ingeniera generada desde su sprite aprobado, rombo isométrico | Documentos en el repo; **el dueño aprueba la Biblia, el GDD y el Capítulo 1** (y decide las marcas 🔶) |
+| **M1 — Motor táctico base** | Tablero, pathfinding, Reloj de Vapor, mover, deshacer, atacar, esperar, daño con desglose, estados, IA v1. **Se borra el código de cartas** (tras la etiqueta) | Vitest en verde; batalla automática IA contra IA con **50 semillas**; **contrato de API congelado** |
+| **M2 — Tablero jugable + Mundo vivo v1** | HUD, capas de color y patrón, cámara fija, animaciones por código, hooks de test y smoke E2E. Sistema «Mundo vivo» v1: `PersonajeVivo` con reposo en bucle, losetas y props animados, partículas de ambiente y parallax, todo con placeholders animados | **B0 jugable de principio a fin en el preview, con todo en movimiento**; CI en verde; capturas y video revisados |
+| **M3 — Caos en el tablero** | Presión y Sobrecarga, Sobremarcha, Prototipos, empuje, Goteras, IA v2 | Tests de cada mecánica; playtest: «¿es divertido?» |
+| **M4 — Historia** | Guiones (`ScriptNode` + `step()`), La Balanza, guardado de campaña con checkpoints y migraciones, diálogo v2 (máquina de escribir, blip por acento, saltar con resumen), barks | **Escena del T-800 y V1 jugables**; el guardado sobrevive a recargar; tests de contenido (hablantes, flags, ids, **todas las opciones de voto alcanzables**, colores únicos) |
+| **M5 — Exploración y hub** | Exploración cenital (Tiled), taberna de Brayan (tienda, contratos, propinas), códice «Estado del Reino» | Recorrido completo: **hub → argumentos → batalla → taberna** |
+| **M6 — Arte con puertas** (en paralelo desde M0) | Producción según `arte-slice.md` con las puertas G1–G4 | Todo lo que sale en pantalla, aprobado; **cada personaje con su set de animaciones y cada escenario con losetas, props y ambiente animados** |
+| **M7 — Capítulo 1 completo y pulido** | Las 4 batallas, V0 y V1, epílogo, audio nuevo, balance, pulido | Slice de **60–90 min**, **≤ 15 min** de escenas no interactivas, **3 playtesters externos** → **merge a `main`** (Capítulo 1 gratis) |
 
-## Fase 1 — Motor de combate completo (core puro + tests)
-- Máquina de estados de turno, energía, robar/descartar/rebarajar con RNG seedeado.
-- Intérprete de efectos completo; statuses con hooks (Vulnerable, Débil, Veneno).
-- **Presión de Vapor** (bonus 4-7, aviso 8-9, Sobrecarga a 10), **Prototipos** (fusible), **Overclock**.
-- Enemigos con intents visibles e IA por patrón; victoria/derrota.
-- Suite Vitest exhaustiva + test de determinismo (seed + intents ⇒ estado idéntico).
+### En la primera ejecución del pivote
 
-## Fase 2 — Combate jugable en pantalla
-- Escena Combat + HUD overlay; mano en abanico; input tap-tap con targeting.
-- Cola de animación de `GameEvent[]` (input nunca bloqueado por reglas).
-- Juice básico: tint-flash, knockback, screen shake, partículas de vapor/chispas, números de daño flotantes (pooled), manómetro de Presión.
-- Placeholders de arte; hook `window.__game` para tests.
+- M0, M1 y M2 completos: una batalla táctica isométrica jugable en el preview, con el escenario y los personajes en movimiento (placeholders animados, partículas, parallax).
+- Prueba G1 de arte: vista Sur de la Ingeniera, enviada al dueño para aprobar.
+- Piloto de animación de escenario: una loseta de canal y un respiradero animados con PixelLab.
+- La narrativa detallada (M4 en adelante) espera a que el dueño apruebe la Biblia v2.
 
-## Fase 3 — Loop de run completo
-- Mapa de nodos procedural (random walks sin cruces) + escena Map.
-- Recompensas (1 de 3), tienda, hoguera, eventos "?", reliquias (el **Coso** como reliquia inicial).
-- **Taberna v1**: nodo de mapa con 2 mercenarios contratables (Contratos: mini-baraja de 3 «Órdenes» + retrato + barks, vence al final del acto), rumores del Coso, beber (cura + carta «Resaca»).
-- Save/load en localStorage (`game:run` / `game:meta`) con versionado y export/import.
-- **Narrador v1**: sistema de barks data-driven sobre GameEvents (cooldowns, pesos, memoria) con banco inicial de ~30 líneas en 3 niveles (burla diegética / meta-juego / cuarta pared), incluidas sus líneas sobre el Coso.
+## Riesgos principales
 
-## Fase 4 — Arte de producción con IA
-- Paleta bloqueada (Resurrect 64 + sub-paletas) y pipeline Pillow de cuantización.
-- PixelLab: Ingeniera 96×96 + 8 enemigos + jefe del Gremio (idle/attack/death); retoque Aseprite.
-- Higgsfield: splash de la Ingeniera (selección de personaje), iconos de carta, fondo de combate, viñetas de eventos.
-- Marcos de carta pixel (tipo + rareza), fuentes bitmap (m6x11 + monogram), atlas con free-tex-packer-core.
+- **Volumen de arte animado** (~1.250 frames de personaje): un set de 8 direcciones con espejo, enemigos solo en diagonales, la Ingeniera como piloto antes de producir en lote, placeholders animados mientras tanto.
+- **Créditos de PixelLab:** se estiman con el piloto y se avisa al dueño antes de producir en lote.
+- **Rendimiento con todo animado:** atlas, tope de partículas, pausar animaciones fuera de cámara; FPS medidos en las capturas.
+- **Explosión de rutas:** columna fija, variantes sobre el mismo mapa y jefe, máximo 3 opciones por voto.
+- **Escenas largas:** presupuesto de 3 minutos por escena y saltar con resumen.
+- **Profundidad isométrica:** cámara fija, mapas de hasta 14×14, altura máxima 6, proyección testeada.
 
-## Fase 5 — Contenido y balance del vertical slice
-- 30-35 cartas (todo el texto de la Ingeniera con su acento paisa), 10-12 reliquias, 4-6 eventos satíricos (máx. 1 cameo pop parodiado según las reglas del GDD §8), élite + jefe con diálogos del Coso (niveles 1-3 de cuarta pared).
-- Balance por playtesting (simulaciones headless del core + partidas reales).
+## Después del slice
 
-## Fase 6 — Pulido y deploy
-- Coreografía completa de la carta explosiva; juice fino; audio (sfxr; ElevenLabs/Suno en fase posterior).
-- Smoke test Playwright en CI (falla ante errores de consola).
-- Deploy a Vercel con link público jugable.
-
-## Post-slice (MVP público → futuro)
-- 50-60 cartas, 2 actos, 2 jefes, meta-progresión de **rutas por época** (GDD §4): la pregunta inicial «Solicitud T-800» elige tu época/personaje de arranque, y completar runs desbloquea las demás épocas, sus cameos y sus epílogos (cada final = una explicación NUEVA y peor del Coso) + 3 Ascensiones.
-- Segundo personaje **solo tras validar el primero**; orden sugerido por contraste de creencia: el Clérigo (medieval devoto) → la Historiadora (futurista que sabe la verdad) → el Reparador (cyberpunk oportunista). El Barón queda como NPC de Taberna y candidato a 5.º jugable.
-- **Taberna v2**: mercenario como aliado en tablero (sprite propio, 1 acción por turno, puede morir), más mercenarios con acentos, el Primo Brayan, barks de pareja fe-vs-escepticismo (GDD §4.4), tablón de misiones absurdas.
-- Más adelante: daily runs (seed por fecha), Ruleta de Engranajes, Contrabando, narrador con voz (ElevenLabs, acentos), itch.io/Steam Next Fest.
+- Capítulo 2 «El Milagro» (el Clérigo; Barrio Catedral; Goteras futuristas), capítulo 3 «La Corona» (el Reparador; Alcázar; Goteras cyberpunk) y final «Casilla 7» (la Historiadora; el Barón del Humo).
+- Más mercenarios (Bardo andaluz, Cartógrafo chileno, Brayan como Consultor Externo).
+- App de escritorio con Tauri; voces (ElevenLabs, con acentos); Steam Next Fest.
+- Multijugador: solo tras validar el single player (el motor determinista con semilla ya permite replays y retos compartidos).

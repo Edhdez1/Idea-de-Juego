@@ -1,6 +1,7 @@
-import Phaser from 'phaser';
-
-/** Mapeo defId → key de textura (los archivos viven en public/assets/sprites). */
+/**
+ * Mapeo defId → key del sprite lateral APROBADO de 128 px (referencia
+ * canónica; se muestra en el panel de unidad de la batalla).
+ */
 const SPRITE_KEYS: Record<string, string> = {
   ingeniera: 'ingeniera',
   aprendiz_explotado: 'aprendiz_explotado',
@@ -14,28 +15,6 @@ const SPRITE_KEYS: Record<string, string> = {
 export function spriteKeyDe(defId: string): string {
   return SPRITE_KEYS[defId] ?? defId;
 }
-
-/**
- * Sprites cuyo dibujo original mira al lado contrario del que le toca en
- * combate (héroe → derecha, enemigos → izquierda): se voltean al crearse.
- */
-const FLIP_X: Record<string, boolean> = {
-  golem_defectuoso: true,
-};
-
-/**
- * Escala de presentación por sprite (los personajes deben imponer en
- * pantalla; el Aprendiz queda chaparrito a propósito).
- */
-const ESCALA: Record<string, number> = {
-  ingeniera: 1.3,
-  golem_defectuoso: 1.3,
-  recaudador: 1.25,
-  inquisidor_patentes: 1.3,
-  aprendiz_explotado: 1.0,
-  gran_maestre: 1.4,
-  brayan: 1.15,
-};
 
 export const SPRITE_FILES: { key: string; file: string }[] = [
   { key: 'ingeniera', file: 'assets/sprites/ingeniera.png' },
@@ -62,23 +41,7 @@ export const INTRO_FILES: { key: string; file: string }[] = [
   { key: 'retrato_brayan', file: 'assets/intro/retrato_brayan.webp' },
 ];
 
-/** Fondos de combate por encuentro (320×180, se muestran a escala 2). */
-export const BG_FILES: { key: string; file: string }[] = [
-  { key: 'bg_taller_gremio', file: 'assets/bg/taller_gremio.png' },
-  { key: 'bg_taberna', file: 'assets/bg/taberna.png' },
-  { key: 'bg_mapa_distrito', file: 'assets/bg/mapa_distrito.png' },
-];
-
-/** Iconos pixel de los nodos del mapa. */
-export const UI_FILES: { key: string; file: string }[] = [
-  'combate',
-  'elite',
-  'taberna',
-  'descanso',
-  'jefe',
-].map((t) => ({ key: `icono_${t}`, file: `assets/ui/icono_${t}.png` }));
-
-/** Arte propio de cada carta (key = card_<defId>). */
+/** Arte de las antiguas cartas, reutilizado como icono de habilidad (SkillDef.icon = card_<id>). */
 export const CARD_ART_FILES: { key: string; file: string }[] = [
   'golpe_de_llave',
   'plancha_remachada',
@@ -88,37 +51,3 @@ export const CARD_ART_FILES: { key: string; file: string }[] = [
   'pistola_de_remaches',
   'turbina_de_taller',
 ].map((id) => ({ key: `card_${id}`, file: `assets/cards/${id}.png` }));
-
-/**
- * Crea el visual de una unidad a escala 1 (pixel-perfect).
- * Si la textura falta, cae a un rectángulo con el nombre: el juego nunca
- * se rompe por un asset ausente.
- */
-export function crearUnidad(
-  scene: Phaser.Scene,
-  x: number,
-  y: number,
-  defId: string,
-  nombre: string,
-): Phaser.GameObjects.Container {
-  const cont = scene.add.container(x, y);
-  const key = spriteKeyDe(defId);
-  if (scene.textures.exists(key)) {
-    const spr = scene.add.image(0, 0, key).setOrigin(0.5, 1);
-    if (FLIP_X[key]) spr.setFlipX(true);
-    const escala = ESCALA[key] ?? 1;
-    spr.setScale(escala);
-    cont.add(spr);
-    cont.setData('sprite', spr);
-    cont.setSize(spr.width * escala, spr.height * escala);
-  } else {
-    const rect = scene.add.rectangle(0, -48, 72, 96, 0x5a4632).setOrigin(0.5, 0.5);
-    const label = scene.add
-      .text(0, -48, nombre, { fontFamily: 'monospace', fontSize: '9px', color: '#e8c170', wordWrap: { width: 68 } })
-      .setOrigin(0.5);
-    cont.add([rect, label]);
-    cont.setData('sprite', rect);
-    cont.setSize(72, 96);
-  }
-  return cont;
-}

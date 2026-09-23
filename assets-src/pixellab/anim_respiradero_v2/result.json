@@ -1,0 +1,30 @@
+{
+  "id": "anim_respiradero_v2",
+  "endpoint": "/animate-with-text-v3",
+  "params": {
+    "action": "small puffs of pale grey-blue steam rise from the iron vent grate and dissipate upward; the cobblestone tile and grate stay perfectly still; seamless loop",
+    "frame_count": 6,
+    "no_background": true,
+    "seed": 3212
+  },
+  "references": {
+    "first_frame": "assets-src/pixellab/loseta_respiradero/image.png"
+  },
+  "seconds": 134.8,
+  "submit_usage": null,
+  "job_usage": {
+    "type": "generations",
+    "generations": 1.0
+  },
+  "job_id": "116bcd0f-9311-45c3-8b21-92b77411191a",
+  "resource": null,
+  "files": [
+    "images_000.png",
+    "images_001.png",
+    "images_002.png",
+    "images_003.png",
+    "images_004.png",
+    "images_005.png",
+    "images_006.png"
+  ]
+}
