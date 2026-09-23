@@ -5,13 +5,16 @@ import { dur } from '../../game/anim';
 export class DamageNumbers {
   private pool: Phaser.GameObjects.Text[] = [];
 
-  constructor(private scene: Phaser.Scene) {}
+  constructor(
+    private scene: Phaser.Scene,
+    private profundidad = 500,
+  ) {}
 
   mostrar(x: number, y: number, texto: string, color: string): void {
     const t =
       this.pool.pop() ??
-      this.scene.add.text(0, 0, '', { fontFamily: 'monospace', fontSize: '14px', fontStyle: 'bold' });
-    t.setText(texto).setColor(color).setPosition(x, y).setAlpha(1).setActive(true).setVisible(true).setDepth(500);
+      this.scene.add.text(0, 0, '', { fontFamily: 'monospace', fontSize: '14px', fontStyle: 'bold', stroke: '#1a1017', strokeThickness: 3 });
+    t.setText(texto).setColor(color).setPosition(x, y).setAlpha(1).setActive(true).setVisible(true).setDepth(this.profundidad);
     this.scene.tweens.add({
       targets: t,
       y: y - 26,

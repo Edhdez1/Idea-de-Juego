@@ -55,7 +55,7 @@ export function alturaCaras(h: number): number {
 
 /** ¿El punto (dx, dy) relativo al centro del rombo cae dentro de la cara superior? */
 export function enRombo(dx: number, dy: number): boolean {
-  return Math.abs(dx) / (TW / 2) + Math.abs(dy) / (TH / 2) <= 1;
+  return Math.abs(dx) / (TW / 2) + Math.abs(dy) / (TH / 2) < 1;
 }
 
 /**
@@ -64,9 +64,11 @@ export function enRombo(dx: number, dy: number): boolean {
  */
 export function enColumna(dx: number, dy: number, caras: number): boolean {
   const ax = Math.abs(dx);
-  if (ax > TW / 2) return false;
+  if (ax >= TW / 2) return false;
   const k = (ax * TH) / TW; // cuánto se estrecha el rombo a esa distancia horizontal
-  return dy >= -TH / 2 + k && dy <= TH / 2 - k + caras;
+  // Bordes estrictos: un punto justo en la arista es de la casilla de detrás
+  // (el centro de una casilla puede coincidir con el vértice de la de delante).
+  return dy > -TH / 2 + k && dy < TH / 2 - k + caras;
 }
 
 /** Casillas en orden de dibujo DESCENDENTE (la de más delante primero). */

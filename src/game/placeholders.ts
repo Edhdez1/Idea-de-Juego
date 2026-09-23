@@ -357,6 +357,41 @@ export function asegurarProp(scene: Phaser.Scene, sprite: string): string {
   return key;
 }
 
+// ---------- Prototipos ----------
+
+/** Prototipo con mecha: calderín de latón con remaches y mecha encendida (frames 'a','b'). */
+export function asegurarPrototipo(scene: Phaser.Scene): string {
+  const key = 'ph_prototipo';
+  if (scene.textures.exists(key)) return key;
+  const w = 20;
+  const h = 26;
+  const l = lienzo(scene, key, w * 2, h);
+  if (!l) return key;
+  const { tex, ctx } = l;
+  for (let f = 0; f < 2; f++) {
+    const ox = f * w;
+    rombo(ctx, ox + 10, h - 3, 18, 6, 'rgba(0,0,0,0.35)');
+    for (let j = 0; j < 14; j++) {
+      for (let i = 0; i < 14; i++) {
+        const d = Math.hypot(i - 6.5, j - 6.5);
+        if (d > 7) continue;
+        ctx.fillStyle = d > 6 ? '#4a3418' : i + j < 9 ? '#e8c170' : '#b08a3a';
+        ctx.fillRect(ox + 3 + i, 9 + j, 1, 1);
+      }
+    }
+    ctx.fillStyle = '#6a4a20';
+    ctx.fillRect(ox + 3, 15, 14, 1);
+    ctx.fillStyle = '#2a2027';
+    ctx.fillRect(ox + 9, 5, 2, 5); // mecha
+    ctx.fillStyle = f === 0 ? '#fff4c8' : '#ff9a3c';
+    ctx.fillRect(ox + 9 + (f === 0 ? 0 : 1), 2 + f, 2, 3); // chispa
+  }
+  tex.refresh();
+  tex.add('a', 0, 0, 0, w, h);
+  tex.add('b', 0, w, 0, w, h);
+  return key;
+}
+
 // ---------- Partículas ----------
 
 export function asegurarParticulas(scene: Phaser.Scene): { punto: string; humo: string } {

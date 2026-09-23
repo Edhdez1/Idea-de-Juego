@@ -77,7 +77,7 @@ describe('pickTile', () => {
   it('una casilla tapada por una columna delantera no se puede elegir por su centro', () => {
     const b = tablero(['0120', '3456', '0000', '2101']);
     const p = toScreen(0, 0, 0, O);
-    expect(pickTile(p.sx, p.sy, b, O)).toEqual({ x: 2, y: 1 });
+    expect(pickTile(p.sx, p.sy, b, O)).toEqual({ x: 1, y: 1 });
   });
 
   it('fuera del tablero devuelve null', () => {
@@ -169,5 +169,19 @@ describe('boardBounds', () => {
     const r1 = boardBounds(b, O, 10);
     expect(r1.x).toBe(r0.x - 10);
     expect(r1.width).toBe(r0.width + 20);
+  });
+});
+
+describe('pickTile con escalones', () => {
+  it('el centro de una casilla que coincide con el vértice de un escalón delantero sigue siendo suya', () => {
+    // (3,2) está un nivel más alta: su vértice superior cae justo en el centro de (2,1)
+    const b = tablero(['000000', '000000', '001100']);
+    for (const [x, y] of [
+      [2, 1],
+      [3, 1],
+    ] as const) {
+      const p = toScreen(x, y, 0, O);
+      expect(pickTile(p.sx, p.sy, b, O)).toEqual({ x, y });
+    }
   });
 });

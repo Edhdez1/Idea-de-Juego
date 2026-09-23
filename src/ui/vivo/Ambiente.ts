@@ -108,7 +108,7 @@ export class Ambiente {
 
   private clave(nombre: string, capa: 'cielo' | 'ciudad' | 'nubes' | 'faro', relleno: string): string {
     const t = this.scene.textures;
-    for (const k of [`parallax_${nombre}_${capa}`, `parallax_${capa}`]) if (t.exists(k)) return k;
+    for (const k of [`${nombre}_${capa}`, `parallax_${nombre}_${capa}`, `parallax_${capa}`]) if (t.exists(k)) return k;
     return relleno;
   }
 
